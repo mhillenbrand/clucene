@@ -32,14 +32,14 @@ class CLUCENE_CONTRIBS_EXPORT TextFragment:LUCENE_BASE
 	int32_t _fragNum;
 	int32_t _textStartPos;
 	int32_t _textEndPos;
-	float_t _score;
+	clucene_float_t _score;
 
 public:
 	TextFragment(int32_t textStartPos, int32_t fragNum);
 	~TextFragment();
 
-	void setScore(float_t score);
-	float_t getScore() const;
+	void setScore(clucene_float_t score);
+	clucene_float_t getScore() const;
 
 	int32_t textEndPos(){ return _textEndPos; }
 	void setTextEndPos(int32_t val){ _textEndPos = val; }

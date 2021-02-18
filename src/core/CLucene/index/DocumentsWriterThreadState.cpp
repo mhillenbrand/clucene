@@ -153,7 +153,7 @@ void DocumentsWriter::ThreadState::writeDocument() {
         assert ( bn != NULL );
         assert ( bn->upto <= docID );
         bn->fill(docID);
-        float_t norm = fp->boost * _parent->writer->getSimilarity()->lengthNorm(fp->fieldInfo->name, fp->length);
+        clucene_float_t norm = fp->boost * _parent->writer->getSimilarity()->lengthNorm(fp->fieldInfo->name, fp->length);
         bn->add(norm);
       }
     }
@@ -492,7 +492,7 @@ void DocumentsWriter::ThreadState::trimFields() {
       fp->lastGen = -1;
       allFieldDataArray.values[upto++] = fp;
 
-      if (fp->numPostings > 0 && ((float_t) fp->numPostings) / fp->postingsHashSize < 0.2) {
+      if (fp->numPostings > 0 && ((clucene_float_t) fp->numPostings) / fp->postingsHashSize < 0.2) {
         int32_t hashSize = fp->postingsHashSize;
 
         // Reduce hash so it's between 25-50% full

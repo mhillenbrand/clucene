@@ -69,7 +69,7 @@ public:
 	}
 
 protected:
-	Query* getFuzzyQuery(TCHAR* /*field*/, TCHAR* /*termStr*/, float_t /*minSimilarity*/) {
+	Query* getFuzzyQuery(TCHAR* /*field*/, TCHAR* /*termStr*/, clucene_float_t /*minSimilarity*/) {
 		_CLTHROWA(CL_ERR_Parse,"Fuzzy queries not allowed");
 	}
 
@@ -370,7 +370,7 @@ void testWildcard(CuTest *tc)
 	assertCorrectQuery(tc, _T("t*"), NULL,"PrefixQuery", _T("t*"));
 
 	FuzzyQuery* fq = (FuzzyQuery*)getQuery(tc,_T("term~0.7"), NULL);
-	float_t simDiff = fq->getMinSimilarity() - 0.7;
+	clucene_float_t simDiff = fq->getMinSimilarity() - 0.7;
 	if ( simDiff < 0 ) simDiff *= -1;
 	CuAssertTrue(tc, simDiff < 0.1);
 	CuAssertTrue(tc, FuzzyQuery::defaultPrefixLength == fq->getPrefixLength());

@@ -17,7 +17,7 @@ public:
      * different  order of operations from the actaul scoring method ...
      * this allows for a small amount of variation
      */
-    static float_t EXPLAIN_SCORE_TOLERANCE_DELTA;
+    static clucene_float_t EXPLAIN_SCORE_TOLERANCE_DELTA;
     
 public:
     /**
@@ -109,7 +109,7 @@ public:
      * @param deep indicates whether a deep comparison of sub-Explanation details should be executed
      * @param expl The Explanation to match against score
      */
-    static void verifyExplanation( CuTest* tc, const TCHAR * q, int32_t doc, float_t score, bool deep, Explanation * expl );
+    static void verifyExplanation( CuTest* tc, const TCHAR * q, int32_t doc, clucene_float_t score, bool deep, Explanation * expl );
 
     static bool setEquals( set<int32_t>& s1, set<int32_t>& s2 );
     static bool stringEndsWith( const TCHAR* tszStr, const TCHAR * tszEnd );

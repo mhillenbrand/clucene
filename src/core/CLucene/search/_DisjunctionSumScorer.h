@@ -38,7 +38,7 @@ private:
 
 	/** The document number of the current match. */
 	int32_t currentDoc;
-	float_t currentScore;
+	clucene_float_t currentScore;
 
 	/** Called the first time next() or skipTo() is called to
 	* initialize <code>scorerDocQueue</code>.
@@ -111,7 +111,7 @@ public:
 	/** Returns the score of the current document matching the query.
 	* Initially invalid, until {@link #next()} is called the first time.
 	*/
-	virtual float_t score();
+	virtual clucene_float_t score();
 
 	int32_t doc() const;
 

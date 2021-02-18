@@ -58,7 +58,7 @@ MultiLevelSkipListWriter::MultiLevelSkipListWriter(int32_t skipInterval, int32_t
   this->skipInterval = skipInterval;
   
   // calculate the maximum number of skip levels for this document frequency
-  numberOfSkipLevels = df == 0 ? 0 : (int32_t) floor(log((float_t)df) / log((float_t)skipInterval));
+  numberOfSkipLevels = df == 0 ? 0 : (int32_t) floor(log((clucene_float_t)df) / log((clucene_float_t)skipInterval));
   
   // make sure it does not exceed maxSkipLevels
   if (numberOfSkipLevels > maxSkipLevels) {

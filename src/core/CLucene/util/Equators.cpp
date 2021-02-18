@@ -85,10 +85,10 @@ size_t Compare::Int32::operator()( int32_t t ) const{
 }
 
 
-float_t Compare::Float::getValue() const{
+clucene_float_t Compare::Float::getValue() const{
 	return value;
 }
-Compare::Float::Float(float_t val){
+Compare::Float::Float(clucene_float_t val){
 	value = val;
 }
 const char* Compare::Float::getClassName(){

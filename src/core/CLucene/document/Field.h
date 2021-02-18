@@ -216,9 +216,9 @@ public:
 	* {@link Hits#doc(int)} may thus not have the same value present as when
 	* this field was indexed.
 	*
-	* @see #setBoost(float_t)
+	* @see #setBoost(clucene_float_t)
 	*/
-	float_t getBoost() const;
+	clucene_float_t getBoost() const;
       
 	/** Sets the boost factor hits on this field.  This value will be
 	* multiplied into the score of all hits on this this field of this
@@ -228,15 +228,15 @@ public:
 	* containing this field.  If a document has multiple fields with the same
 	* name, all such values are multiplied together.  This product is then
 	* multipled by the value {@link Similarity#lengthNorm(String,int)}, and
-	* rounded by {@link Similarity#encodeNorm(float_t)} before it is stored in the
+	* rounded by {@link Similarity#encodeNorm(clucene_float_t)} before it is stored in the
 	* index.  One should attempt to ensure that this product does not overflow
 	* the range of that encoding.
 	*
-	* @see Document#setBoost(float_t)
+	* @see Document#setBoost(clucene_float_t)
 	* @see Similarity#lengthNorm(String, int)
-	* @see Similarity#encodeNorm(float_t)
+	* @see Similarity#encodeNorm(clucene_float_t)
 	*/
-	void setBoost(const float_t value);
+	void setBoost(const clucene_float_t value);
 
 	/** True if the value of the filed is stored as binary */
 	bool isBinary() const;
@@ -308,7 +308,7 @@ protected:
 
 	const TCHAR* _name;
 	uint32_t config;
-	float_t boost;
+	clucene_float_t boost;
 };
 CL_NS_END
 #endif

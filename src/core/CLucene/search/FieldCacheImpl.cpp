@@ -285,8 +285,8 @@ FieldCacheImpl::FileEntry::FileEntry (const TCHAR* field, int32_t type) {
     FieldCacheAuto* ret = lookup (reader, field, SortField::FLOAT);
     if (ret == NULL) {
 	  int32_t retLen = reader->maxDoc();
-      float_t* retArray = _CL_NEWARRAY(float_t,retLen);
-	  memset(retArray,0,sizeof(float_t)*retLen);
+      clucene_float_t* retArray = _CL_NEWARRAY(clucene_float_t,retLen);
+	  memset(retArray,0,sizeof(clucene_float_t)*retLen);
       if (retLen > 0) {
         TermDocs* termDocs = reader->termDocs();
 
@@ -303,7 +303,7 @@ FieldCacheImpl::FileEntry::FileEntry (const TCHAR* field, int32_t type) {
             if (term->field() != field)
 				break;
 
-            float_t termval = _tcstod(term->text(),NULL);
+            clucene_float_t termval = _tcstod(term->text(),NULL);
             termDocs->seek (termEnum);
             while (termDocs->next()) {
               retArray[termDocs->doc()] = termval;

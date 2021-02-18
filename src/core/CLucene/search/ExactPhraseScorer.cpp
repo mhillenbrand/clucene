@@ -31,7 +31,7 @@ CL_NS_DEF(search)
 
 	ExactPhraseScorer::~ExactPhraseScorer(){}
 
-	float_t ExactPhraseScorer::phraseFreq(){
+	clucene_float_t ExactPhraseScorer::phraseFreq(){
 	//Func - Returns the freqency of the phrase
 	//Pre  - first != NULL
 	//       last  != NULL
@@ -72,7 +72,7 @@ CL_NS_DEF(search)
 			while (first->position < last->position){	//scan forward in first
 				do{
 					if (!first->nextPosition()){
-						return (float_t)freq;
+						return (clucene_float_t)freq;
 					}
 				} while (first->position < last->position);
 				//Make the current first node the last node in the list
@@ -82,7 +82,7 @@ CL_NS_DEF(search)
 			freq++;
 		} while (last->nextPosition());
 
-		return (float_t)freq;
+		return (clucene_float_t)freq;
 	}
 
 	TCHAR* ExactPhraseScorer::toString(){

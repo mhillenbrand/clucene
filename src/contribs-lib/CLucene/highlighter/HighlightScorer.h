@@ -45,7 +45,7 @@ public:
 	 * @return a score which is passed to the Highlighter class to influence the mark-up of the text
 	 * (this return value is NOT used to score the fragment)
 	 */
-	virtual float_t getTokenScore(CL_NS(analysis)::Token* token) = 0;
+	virtual clucene_float_t getTokenScore(CL_NS(analysis)::Token* token) = 0;
 	
 
 	/**
@@ -54,7 +54,7 @@ public:
 	 * passed to getTokenScore(). 
 	 *
 	 */	
-	virtual float_t getFragmentScore() = 0;
+	virtual clucene_float_t getFragmentScore() = 0;
 };
 
 CL_NS_END2

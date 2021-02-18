@@ -111,7 +111,7 @@ std::string MergePolicy::MergeSpecification::segString(CL_NS(store)::Directory* 
 
 
 
-const float_t LogMergePolicy::LEVEL_LOG_SPAN = 0.75;
+const clucene_float_t LogMergePolicy::LEVEL_LOG_SPAN = 0.75;
 
 void LogMergePolicy::message(const string& message) {
   if (writer != NULL){
@@ -293,8 +293,8 @@ MergePolicy::MergeSpecification* LogMergePolicy::findMerges(SegmentInfos* infos,
 
   // Compute levels, which is just log (base mergeFactor)
   // of the size of each segment
-  ValueArray<float_t> levels(numSegments);
-  const float_t norm = log((float_t)mergeFactor);
+  ValueArray<clucene_float_t> levels(numSegments);
+  const clucene_float_t norm = log((clucene_float_t)mergeFactor);
 
   for(int32_t i=0;i<numSegments;i++) {
     SegmentInfo* info = infos->info(i);
@@ -303,14 +303,14 @@ MergePolicy::MergeSpecification* LogMergePolicy::findMerges(SegmentInfos* infos,
     // Floor tiny segments
     if (_size < 1)
       _size = 1;
-    levels[i] = log((float_t)_size)/norm;
+    levels[i] = log((clucene_float_t)_size)/norm;
   }
 
-  float_t levelFloor;
+  clucene_float_t levelFloor;
   if (minMergeSize <= 0)
     levelFloor = 0.0;
   else
-    levelFloor = log((float_t)minMergeSize)/norm;
+    levelFloor = log((clucene_float_t)minMergeSize)/norm;
 
   // Now, we quantize the log values into levels.  The
   // first level is any segment whose log size is within
@@ -326,16 +326,16 @@ MergePolicy::MergeSpecification* LogMergePolicy::findMerges(SegmentInfos* infos,
 
     // Find max level of all segments not already
     // quantized.
-    float_t maxLevel = levels[start];
+    clucene_float_t maxLevel = levels[start];
     for(int32_t i=1+start;i<numSegments;i++) {
-      const float_t level = levels[i];
+      const clucene_float_t level = levels[i];
       if (level > maxLevel)
         maxLevel = level;
     }
 
     // Now search backwards for the rightmost segment that
     // falls into this level:
-    float_t levelBottom;
+    clucene_float_t levelBottom;
     if (maxLevel < levelFloor)
       // All remaining segments fall into the min level
       levelBottom = -1.0F;
@@ -449,11 +449,11 @@ int64_t LogByteSizeMergePolicy::size(SegmentInfo* info) {
 }
 
 /** Default minimum segment size.  @see setMinMergeMB */
-const float_t LogByteSizeMergePolicy::DEFAULT_MIN_MERGE_MB = 1.6;
+const clucene_float_t LogByteSizeMergePolicy::DEFAULT_MIN_MERGE_MB = 1.6;
 
 /** Default maximum segment size.  A segment of this size
  *  or larger will never be merged.  @see setMaxMergeMB */
-const float_t LogByteSizeMergePolicy::DEFAULT_MAX_MERGE_MB = (float_t)LUCENE_INT64_MAX_SHOULDBE;
+const clucene_float_t LogByteSizeMergePolicy::DEFAULT_MAX_MERGE_MB = (clucene_float_t)LUCENE_INT64_MAX_SHOULDBE;
 
 LogByteSizeMergePolicy::LogByteSizeMergePolicy() {
   minMergeSize = (int64_t) (DEFAULT_MIN_MERGE_MB*1024*1024);
@@ -471,7 +471,7 @@ LogByteSizeMergePolicy::LogByteSizeMergePolicy() {
  *  <p>Note that {@link #setMaxMergeDocs} is also
  *  used to check whether a segment is too large for
  *  merging (it's either or).</p>*/
-void LogByteSizeMergePolicy::setMaxMergeMB(float_t mb) {
+void LogByteSizeMergePolicy::setMaxMergeMB(clucene_float_t mb) {
   maxMergeSize = (uint64_t) (mb*1024*1024);
 }
 
@@ -479,8 +479,8 @@ void LogByteSizeMergePolicy::setMaxMergeMB(float_t mb) {
  *  size of the segment's files, in MB) that may be merged
  *  with other segments.
  *  @see #setMaxMergeMB */
-float_t LogByteSizeMergePolicy::getMaxMergeMB() {
-  return ((float_t) maxMergeSize)/1024/1024;
+clucene_float_t LogByteSizeMergePolicy::getMaxMergeMB() {
+  return ((clucene_float_t) maxMergeSize)/1024/1024;
 }
 
 /** Sets the minimum size for the lowest level segments.
@@ -492,15 +492,15 @@ float_t LogByteSizeMergePolicy::getMaxMergeMB() {
  * single level.  If you set this too large, it could
  * greatly increase the merging cost during indexing (if
  * you flush many small segments). */
-void LogByteSizeMergePolicy::setMinMergeMB(float_t mb) {
+void LogByteSizeMergePolicy::setMinMergeMB(clucene_float_t mb) {
   minMergeSize = (int64_t) (mb*1024*1024);
 }
 
 /** Get the minimum size for a segment to remain
  *  un-merged.
  *  @see #setMinMergeMB **/
-float_t LogByteSizeMergePolicy::getMinMergeMB() {
-  return ((float_t) minMergeSize)/1024/1024;
+clucene_float_t LogByteSizeMergePolicy::getMinMergeMB() {
+  return ((clucene_float_t) minMergeSize)/1024/1024;
 }
 
 const char* LogByteSizeMergePolicy::getClassName(){

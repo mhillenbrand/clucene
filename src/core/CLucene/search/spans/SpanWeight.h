@@ -22,10 +22,10 @@ class CLUCENE_EXPORT SpanWeight : public CL_NS(search)::Weight
 {
 protected:
     CL_NS(search)::Similarity * similarity;
-    float_t                     value;
-    float_t                     idf;
-    float_t                     queryNorm;
-    float_t                     queryWeight;
+    clucene_float_t                     value;
+    clucene_float_t                     idf;
+    clucene_float_t                     queryNorm;
+    clucene_float_t                     queryWeight;
 
     CL_NS(search)::TermSet *    terms;
     SpanQuery *                 query;
@@ -37,9 +37,9 @@ public:
     CL_NS(search)::Scorer * scorer( CL_NS(index)::IndexReader* reader );
     CL_NS(search)::Explanation * explain( CL_NS(index)::IndexReader* reader, int32_t doc );
     CL_NS(search)::Query * getQuery();
-    float_t getValue();
-    float_t sumOfSquaredWeights();
-    void normalize( float_t norm );
+    clucene_float_t getValue();
+    clucene_float_t sumOfSquaredWeights();
+    void normalize( clucene_float_t norm );
 };
 
 CL_NS_END2

@@ -178,9 +178,9 @@ void testKnownSetOfDocuments(CuTest *tc) {
           int32_t freq = termDocs->freq();
           //System.out.println("Doc Id: " + docId + " freq " + freq);
           TermFreqVector* vector = knownSearcher.getReader()->getTermFreqVector(docId, _T("field"));
-          float_t tf = sim->tf(freq);
-          float_t idf = sim->idf(term, &knownSearcher);
-          //float_t qNorm = sim.queryNorm()
+          clucene_float_t tf = sim->tf(freq);
+          clucene_float_t idf = sim->idf(term, &knownSearcher);
+          //clucene_float_t qNorm = sim.queryNorm()
           idf += tf; //remove warning
 
           const ArrayBase<const TCHAR*>* terms = vector->getTerms();
@@ -188,10 +188,10 @@ void testKnownSetOfDocuments(CuTest *tc) {
           int termsCount=terms != NULL ? terms->length : 0;
 
           //This is fine since we don't have stop words
-          float_t lNorm = sim->lengthNorm(_T("field"), termsCount);
+          clucene_float_t lNorm = sim->lengthNorm(_T("field"), termsCount);
           lNorm ++;//remove warning
 
-          //float_t coord = sim.coord()
+          //clucene_float_t coord = sim.coord()
           //System.out.println("TF: " + tf + " IDF: " + idf + " LenNorm: " + lNorm);
           const ArrayBase<const TCHAR*>* vTerms = vector->getTerms();
           const ArrayBase<int32_t>* freqs = vector->getTermFrequencies();
@@ -221,7 +221,7 @@ void testKnownSetOfDocuments(CuTest *tc) {
       Hits* hits = knownSearcher.search(&query);
       //doc 3 should be the first hit b/c it is the shortest match
       CLUCENE_ASSERT(hits->length() == 3);
-      float_t score = hits->score(0);
+      clucene_float_t score = hits->score(0);
       score++;
 
       CLUCENE_ASSERT(2==hits->id(0) );

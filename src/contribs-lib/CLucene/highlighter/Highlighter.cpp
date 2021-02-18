@@ -266,7 +266,7 @@ CL_NS_USE(util)
 				}
 
 				// does query contain current token?
-				float_t score=_fragmentScorer->getTokenScore(&token);			
+				clucene_float_t score=_fragmentScorer->getTokenScore(&token);			
 				//TCHAR* highlightedTerm = _formatter->highlightTerm(&substringBuffer, token->termText(), score, startOffset);
 				//newText->append(highlightedTerm);
 				//_CLDELETE_CARRAY(highlightedTerm);

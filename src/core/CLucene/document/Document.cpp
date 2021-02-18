@@ -77,11 +77,11 @@ CL_NS_DEF(document)
 		_fields->push_back(&field);
 	}
 
-   void Document::setBoost(const float_t boost) {
+   void Document::setBoost(const clucene_float_t boost) {
       this->boost = boost;
    }
 
-   float_t Document::getBoost() const {
+   clucene_float_t Document::getBoost() const {
       return boost;
    }
 

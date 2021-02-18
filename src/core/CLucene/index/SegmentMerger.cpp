@@ -803,7 +803,7 @@ SegmentMerger::CheckAbort::CheckAbort(MergePolicy::OneMerge* merge, Directory* d
   this->workCount = 0;
 }
 
-void SegmentMerger::CheckAbort::work(float_t units){
+void SegmentMerger::CheckAbort::work(clucene_float_t units){
   workCount += units;
   if (workCount >= 10000.0) {
     merge->checkAborted(dir);

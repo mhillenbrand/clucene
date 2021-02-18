@@ -155,10 +155,10 @@ CL_NS_DEF(util)
       append(buf);
   }
 
-  void StringBuffer::appendFloat(const float_t value, const size_t digits){
-  //Func - Appends a float_t (after conversion to a character string)
+  void StringBuffer::appendFloat(const clucene_float_t value, const size_t digits){
+  //Func - Appends a clucene_float_t (after conversion to a character string)
   //Pre  - digits > 0. Indicates the minimum number of characters printed
-  //Post - The converted float_t value has been appended to the string in buffer
+  //Post - The converted clucene_float_t value has been appended to the string in buffer
 
     //using sprintf("%f" was not reliable on other plaforms... we use a custom float convertor
     //bvk: also, using sprintf and %f seems excessivelly slow
@@ -174,7 +174,7 @@ CL_NS_DEF(util)
 	 if ( dig > 0 ){
 		_tcscat(buf,_T(".")); //add a decimal point
 
-		int64_t remi=(int64_t)((value-v)*pow((float_t)10,(float_t)(dig+1))); //take the remainder and make a whole number
+		int64_t remi=(int64_t)((value-v)*pow((clucene_float_t)10,(clucene_float_t)(dig+1))); //take the remainder and make a whole number
 		if ( remi<0 ) remi*=-1;
 		int64_t remadj=remi/10;
 		if ( remi-(remadj*10) >=5 )
@@ -184,7 +184,7 @@ CL_NS_DEF(util)
 		// significant part of the number. Fixes a bug when trying to print
 		// numbers that have zeros right after the decimal point
 		if (remadj) {
-			size_t numZeros = dig - (size_t)log10((float_t)remadj) - 1;
+			size_t numZeros = dig - (size_t)log10((clucene_float_t)remadj) - 1;
 		    while(numZeros-- > 0 && numZeros < 10)
 				_tcscat(buf,_T("0")); //add a zero before the decimal point
 		}
@@ -195,7 +195,7 @@ CL_NS_DEF(util)
 	 append(buf);
   }
 
-  void StringBuffer::appendBoost(const float_t boost){
+  void StringBuffer::appendBoost(const clucene_float_t boost){
 	  if (boost != 1.0f) {
 		  appendChar(_T('^')); appendFloat(boost,1);
 	  }

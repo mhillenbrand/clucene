@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////////////////////////////////
 int32_t QueryUtils::skip_op = 0;
 int32_t QueryUtils::next_op = 1;
-float_t QueryUtils::maxDiff = 1e-5f;
+clucene_float_t QueryUtils::maxDiff = 1e-5f;
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -70,15 +70,15 @@ public:
     CuTest *    tc;
 
 public:
-    void collect( const int32_t doc, const float_t score )
+    void collect( const int32_t doc, const clucene_float_t score )
     {
         int32_t op = order[ (opidx[ 0 ]++ ) % orderLength ];
         bool more = ( op == QueryUtils::skip_op ) ? scorer->skipTo( sdoc[ 0 ] + 1 ) : scorer->next();
         sdoc[ 0 ] = scorer->doc();
-        float_t scorerScore = scorer->score();
-        float_t scorerScore2 = scorer->score();
-        float_t scoreDiff = score > scorerScore ? score - scorerScore : scorerScore - score;
-        float_t scorerDiff = scorerScore2 > scorerScore2 ? scorerScore2 - scorerScore : scorerScore - scorerScore2;
+        clucene_float_t scorerScore = scorer->score();
+        clucene_float_t scorerScore2 = scorer->score();
+        clucene_float_t scoreDiff = score > scorerScore ? score - scorerScore : scorerScore - score;
+        clucene_float_t scorerDiff = scorerScore2 > scorerScore2 ? scorerScore2 - scorerScore : scorerScore - scorerScore2;
         if( ! more || doc != sdoc[ 0 ] || scoreDiff > QueryUtils::maxDiff || scorerDiff > QueryUtils::maxDiff )
         {
             StringBuffer buffer;
@@ -139,7 +139,7 @@ public:
     CuTest *            tc;
 
 public:
-    void collect( const int32_t doc, const float_t score )
+    void collect( const int32_t doc, const clucene_float_t score )
     {
         for( int32_t i = lastDoc[ 0 ] + 1; i <= doc; i++ )
         {
@@ -169,8 +169,8 @@ public:
                 assertTrueMsg( buffer.getBuffer(), false );
             }
 
-            float_t skipToScore = scorer->score();
-            float_t sd = skipToScore - scorer->score();
+            clucene_float_t skipToScore = scorer->score();
+            clucene_float_t sd = skipToScore - scorer->score();
             if( ( sd < 0 ? sd * -1 : sd ) > QueryUtils::maxDiff )
             {
                 StringBuffer buffer;

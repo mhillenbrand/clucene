@@ -73,7 +73,7 @@ void TestSpansAdvanced::testBooleanQueryWithSpanQueries()
     doTestBooleanQueryWithSpanQueries( 0.3884282f );
 }
 
-void TestSpansAdvanced::doTestBooleanQueryWithSpanQueries( const float_t expectedScore )
+void TestSpansAdvanced::doTestBooleanQueryWithSpanQueries( const clucene_float_t expectedScore )
 {
     Term * t1 = _CLNEW Term( field_text, _T( "work" ));
     Query * spanQuery = _CLNEW SpanTermQuery( t1 );
@@ -83,7 +83,7 @@ void TestSpansAdvanced::doTestBooleanQueryWithSpanQueries( const float_t expecte
     query->add( spanQuery, false, BooleanClause::MUST );
 
     const TCHAR * expectedIds[] = { _T( "1" ), _T( "2" ), _T( "3" ), _T( "4" ) };
-    float_t expectedScores[] = { expectedScore, expectedScore, expectedScore, expectedScore };
+    clucene_float_t expectedScores[] = { expectedScore, expectedScore, expectedScore, expectedScore };
 
     assertHits( query, _T( "two span queries" ), expectedIds, expectedScores, 4 );
 
@@ -92,9 +92,9 @@ void TestSpansAdvanced::doTestBooleanQueryWithSpanQueries( const float_t expecte
     _CLLDELETE( query );
 }
 
-void TestSpansAdvanced::assertHits( Query * query, const TCHAR * description, const TCHAR ** expectedIds, float_t * expectedScores, size_t expectedCount )
+void TestSpansAdvanced::assertHits( Query * query, const TCHAR * description, const TCHAR ** expectedIds, clucene_float_t * expectedScores, size_t expectedCount )
 {
-    float_t tolerance = 1e-5f;
+    clucene_float_t tolerance = 1e-5f;
 
     QueryUtils::check( tc, query, searcher );
 
@@ -118,7 +118,7 @@ void TestSpansAdvanced::assertHits( Query * query, const TCHAR * description, co
         //System.out.println(i + " field: " + hits.doc(i).get(FIELD_ID));
 
         int32_t id = topdocs->scoreDocs[ i ].doc;
-        float_t score = topdocs->scoreDocs[ i ].score;
+        clucene_float_t score = topdocs->scoreDocs[ i ].score;
         Document doc;
         searcher->doc( id, doc );
         assertTrueMsg( _T( "actual document does not match the expected one" ), 0 == _tcscmp( expectedIds[ i ], doc.get( field_id )));
@@ -127,7 +127,7 @@ void TestSpansAdvanced::assertHits( Query * query, const TCHAR * description, co
         Explanation exp;
         searcher->explain( query, id, &exp );
         
-        float_t sd = exp.getDetail( 0 )->getValue() - score;
+        clucene_float_t sd = exp.getDetail( 0 )->getValue() - score;
         if ( sd < 0 ) sd *= -1;
         assertTrueMsg( _T( "explained score does not match" ), sd < tolerance );
     }

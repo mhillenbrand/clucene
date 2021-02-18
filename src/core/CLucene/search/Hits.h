@@ -91,7 +91,7 @@ CL_NS_DEF(search)
 		int32_t id (const int32_t n);
 	    
 		/** Returns the score for the n<sup>th</sup> document in this set. */
-		float_t score(const int32_t n);
+		clucene_float_t score(const int32_t n);
 
 		/** count # deletions, return -1 if unknown. */
 		int32_t countDeletions(CL_NS(search)::Searcher* s);

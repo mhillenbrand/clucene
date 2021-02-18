@@ -65,6 +65,21 @@
     #include <tchar.h> //required for _T and TCHAR
 #endif
 
+
+////////////////////////////////////////////////////////
+//Type definitions
+////////////////////////////////////////////////////////
+#ifdef __s390x__
+#define HAVE_SPECIAL_CLUCENE_FLOAT_T
+#define SPECIAL_CLUCENE_FLOAT_T double
+#endif
+
+#ifdef HAVE_SPECIAL_CLUCENE_FLOAT_T
+typedef SPECIAL_CLUCENE_FLOAT_T clucene_float_t;
+#else
+typedef float_t clucene_float_t;
+#endif
+
 ////////////////////////////////////////////////////////
 //namespace helper
 ////////////////////////////////////////////////////////

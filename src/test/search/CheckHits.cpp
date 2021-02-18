@@ -9,7 +9,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////////
-float_t CheckHits::EXPLAIN_SCORE_TOLERANCE_DELTA = 0.00005f;
+clucene_float_t CheckHits::EXPLAIN_SCORE_TOLERANCE_DELTA = 0.00005f;
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ public:
         _CLDELETE_LARRAY( d );
     }
 
-    void collect( const int32_t doc, const float_t score )
+    void collect( const int32_t doc, const clucene_float_t score )
     {
         Explanation exp;
         s->explain( q, doc, &exp );
@@ -129,7 +129,7 @@ public:
     HitSetCollector() : HitCollector() {};
     virtual ~HitSetCollector() {};
 
-    virtual void collect( const int32_t doc, const float_t score ) { actual.insert( doc ); }
+    virtual void collect( const int32_t doc, const clucene_float_t score ) { actual.insert( doc ); }
 };
 
 
@@ -285,7 +285,7 @@ void CheckHits::checkHitsQuery( CuTest* tc, Query * query, Hits * hits1, Hits * 
 
 void CheckHits::checkEqual( CuTest* tc, Query * query, Hits * hits1, Hits * hits2 )
 {
-    float_t scoreTolerance = 1.0e-6f;
+    clucene_float_t scoreTolerance = 1.0e-6f;
     assertTrueMsg( _T( "Unequal lengths of supplied hits." ), hits1->length() == hits2->length() );
 
     for( size_t i = 0; i < hits1->length(); i++ )
@@ -305,7 +305,7 @@ void CheckHits::checkEqual( CuTest* tc, Query * query, Hits * hits1, Hits * hits
             assertTrueMsg( buffer.getBuffer(), false );
         }
 
-        float_t sd = hits1->score( i ) -  hits2->score( i );
+        clucene_float_t sd = hits1->score( i ) -  hits2->score( i );
         if ( sd < 0 ) sd *= -1;
         
         if(( hits1->id( i ) != hits2->id( i ))
@@ -411,12 +411,12 @@ void CheckHits::checkExplanations( CuTest* tc, Query * query, const TCHAR * defa
 }
 
 
-void CheckHits::verifyExplanation( CuTest* tc, const TCHAR * q, int32_t doc, float_t score, bool deep, Explanation * expl )
+void CheckHits::verifyExplanation( CuTest* tc, const TCHAR * q, int32_t doc, clucene_float_t score, bool deep, Explanation * expl )
 {
     StringBuffer buffer;
     TCHAR * tmp;
     
-    float_t value = expl->getValue();
+    clucene_float_t value = expl->getValue();
 
     if( ( score > value ? score - value : value - score ) > EXPLAIN_SCORE_TOLERANCE_DELTA )
     {
@@ -453,7 +453,7 @@ void CheckHits::verifyExplanation( CuTest* tc, const TCHAR * q, int32_t doc, flo
             // explanation must either:
             // - end with one of: "product of:", "sum of:", "max of:", or
             // - have "max plus <x> times others" (where <x> is float).
-            float_t x = 0;
+            clucene_float_t x = 0;
             const TCHAR* descr = expl->getDescription();
             TCHAR* descrLwr = STRDUP_TtoT( descr );
             _tcslwr( descrLwr );
@@ -492,18 +492,18 @@ void CheckHits::verifyExplanation( CuTest* tc, const TCHAR * q, int32_t doc, flo
                 assertTrueMsg( buffer.getBuffer(), false );
             }
 
-            float_t sum = 0;
-            float_t product = 1;
-            float_t max = 0;
+            clucene_float_t sum = 0;
+            clucene_float_t product = 1;
+            clucene_float_t max = 0;
             for( size_t i = 0; i < expl->getDetailsLength(); i++ )
             {
-                float_t dval = detail[ i ]->getValue();
+                clucene_float_t dval = detail[ i ]->getValue();
                 verifyExplanation( tc, q, doc, dval, deep, detail[ i ] );
                 product *= dval;
                 sum += dval;
                 max = max > dval ? max : dval;      // max
             }
-            float_t combined = 0;
+            clucene_float_t combined = 0;
 
             if( productOf )
                 combined = product;

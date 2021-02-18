@@ -23,13 +23,13 @@ protected:
     Spans *                     spans;
     CL_NS(search)::Weight *     weight;
     uint8_t*                    norms;
-    float_t                     value;
+    clucene_float_t                     value;
 
     bool                        firstTime;
     bool                        more;
 
     int32_t                     doc_;
-    float_t                     freq;
+    clucene_float_t                     freq;
 
 
 public:
@@ -39,7 +39,7 @@ public:
 	bool next();
 	bool skipTo( int32_t target );
 	int32_t doc() const;
-	float_t score();
+	clucene_float_t score();
 	CL_NS(search)::Explanation* explain( int32_t docIn );
 	TCHAR* toString();
 

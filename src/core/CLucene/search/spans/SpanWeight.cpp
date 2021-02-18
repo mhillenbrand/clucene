@@ -41,18 +41,18 @@ CL_NS(search)::Query * SpanWeight::getQuery()
     return query; 
 }
 
-float_t SpanWeight::getValue()
+clucene_float_t SpanWeight::getValue()
 {
     return value;
 }
 
-float_t SpanWeight::sumOfSquaredWeights()
+clucene_float_t SpanWeight::sumOfSquaredWeights()
 {
     queryWeight = idf * query->getBoost();         // compute query weight
     return queryWeight * queryWeight;             // square it
 }
 
-void SpanWeight::normalize( float_t norm )
+void SpanWeight::normalize( clucene_float_t norm )
 {
     queryNorm = norm;
     queryWeight *= queryNorm;                     // normalize query weight
@@ -141,7 +141,7 @@ CL_NS(search)::Explanation * SpanWeight::explain( CL_NS(index)::IndexReader* rea
 
     Explanation * fieldNormExpl = _CLNEW Explanation();
     uint8_t * fieldNorms = reader->norms( field );
-    float_t fieldNorm = fieldNorms != NULL ? Similarity::decodeNorm( fieldNorms[ doc ] ) : 0.0f;
+    clucene_float_t fieldNorm = fieldNorms != NULL ? Similarity::decodeNorm( fieldNorms[ doc ] ) : 0.0f;
     fieldNormExpl->setValue( fieldNorm );
     strBuf.clear();
     strBuf.append( _T( "fieldNorm(field=" ));

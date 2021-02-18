@@ -40,7 +40,7 @@ CL_NS_DEF(search)
 		* would get same score as "g f"~2, although "c b"~2 could be matched twice.
 		* We may want to fix this in the future (currently not, for performance reasons).
 		*/
-		float_t phraseFreq();
+		clucene_float_t phraseFreq();
 	private:
 		typedef CL_NS(util)::CLHashMap<PhrasePositions*, 
 			const void*, CL_NS(util)::Compare::Void<PhrasePositions>, 

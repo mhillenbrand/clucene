@@ -20,7 +20,7 @@ public:
 
     virtual ~MockHitCollector() {}
 
-    virtual void collect(const int32_t doc, const float_t score)
+    virtual void collect(const int32_t doc, const clucene_float_t score)
     {
         collectCalls++;
     }

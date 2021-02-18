@@ -56,7 +56,7 @@ private:
 	}
 
 	Hits* searchQuery(IndexSearcher* searcher, const TCHAR* field, const TCHAR* text,
-		float_t minSimilarity=FuzzyQuery::defaultMinSimilarity, size_t prefixLen=0){
+		clucene_float_t minSimilarity=FuzzyQuery::defaultMinSimilarity, size_t prefixLen=0){
 
 		Term* t = _CLNEW Term(field, text);
 		FuzzyQuery* query = _CLNEW FuzzyQuery(t, minSimilarity, prefixLen);
@@ -67,7 +67,7 @@ private:
 	}
 
 	size_t getHitsLength(IndexSearcher* searcher, const TCHAR* field, const TCHAR* text,
-		float_t minSimilarity=FuzzyQuery::defaultMinSimilarity, size_t prefixLen=0){
+		clucene_float_t minSimilarity=FuzzyQuery::defaultMinSimilarity, size_t prefixLen=0){
 
 		Hits* hits = searchQuery(searcher, field, text, minSimilarity, prefixLen);
 		size_t ret = hits->length();

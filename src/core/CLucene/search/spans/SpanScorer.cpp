@@ -82,9 +82,9 @@ int32_t SpanScorer::doc() const
     return doc_;
 }
 
-float_t SpanScorer::score()
+clucene_float_t SpanScorer::score()
 {
-    float_t raw = getSimilarity()->tf( freq ) * value; // raw score
+    clucene_float_t raw = getSimilarity()->tf( freq ) * value; // raw score
     return raw * Similarity::decodeNorm( norms[ doc_ ]); // normalize
 }
 
@@ -93,7 +93,7 @@ CL_NS(search)::Explanation * SpanScorer::explain( int32_t docIn )
     Explanation * tfExplanation = _CLNEW Explanation();
 
     skipTo( docIn );
-    float_t phraseFreq = (doc() == docIn ) ? freq : 0.0f;
+    clucene_float_t phraseFreq = (doc() == docIn ) ? freq : 0.0f;
     tfExplanation->setValue( getSimilarity()->tf( phraseFreq ));
 
     CL_NS(util)::StringBuffer strBuf( 50 );

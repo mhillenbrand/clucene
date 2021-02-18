@@ -214,7 +214,7 @@ CL_NS_DEF(index)
   }
 
 
-  void IndexReader::setNorm(int32_t doc, const TCHAR* field, float_t value){
+  void IndexReader::setNorm(int32_t doc, const TCHAR* field, clucene_float_t value){
      ensureOpen();
      setNorm(doc, field, CL_NS(search)::Similarity::encodeNorm(value));
   }

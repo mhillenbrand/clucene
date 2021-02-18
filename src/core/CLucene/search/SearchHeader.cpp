@@ -112,15 +112,15 @@ TCHAR* Query::toString() const{
    return toString(LUCENE_BLANK_STRING);
 }
 
-void Query::setBoost(float_t b) { boost = b; }
+void Query::setBoost(clucene_float_t b) { boost = b; }
 
-float_t Query::getBoost() const { return boost; }
+clucene_float_t Query::getBoost() const { return boost; }
 
 Weight* Query::weight(Searcher* searcher){
     Query* query = searcher->rewrite(this);
     Weight* weight = query->_createWeight(searcher);
-    float_t sum = weight->sumOfSquaredWeights();
-    float_t norm = getSimilarity(searcher)->queryNorm(sum);
+    clucene_float_t sum = weight->sumOfSquaredWeights();
+    clucene_float_t norm = getSimilarity(searcher)->queryNorm(sum);
     weight->normalize(norm);
     return weight;
 }

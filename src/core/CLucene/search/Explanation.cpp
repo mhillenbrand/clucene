@@ -12,7 +12,7 @@ CL_NS_USE(util)
 CL_NS_DEF(search)
 
 
-Explanation::Explanation(float_t _value, const TCHAR* _description):value(_value),details(NULL)
+Explanation::Explanation(clucene_float_t _value, const TCHAR* _description):value(_value),details(NULL)
 {
 	_tcsncpy(this->description,_description,LUCENE_SEARCH_EXPLANATION_DESC_LEN);
 }
@@ -54,10 +54,10 @@ bool Explanation::isMatch() const {
 	return (0.0f < getValue());
 }
 
-float_t Explanation::getValue() const{
+clucene_float_t Explanation::getValue() const{
    return value;
 }
-void Explanation::setValue(const float_t value) {
+void Explanation::setValue(const clucene_float_t value) {
    this->value = value;
 }
 
@@ -149,7 +149,7 @@ ComplexExplanation::ComplexExplanation(const ComplexExplanation& copy):
 {
    this->match = copy.match;
 }
-ComplexExplanation::ComplexExplanation(const bool _match, const float_t _value, const TCHAR* _description):
+ComplexExplanation::ComplexExplanation(const bool _match, const clucene_float_t _value, const TCHAR* _description):
 	Explanation(_value, _description), match(_match)
 {
 }

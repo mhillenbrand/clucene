@@ -110,7 +110,7 @@ int32_t ScorerDocQueue::topDoc()
 	return topHsd->_doc;
 }
 
-float_t ScorerDocQueue::topScore()
+clucene_float_t ScorerDocQueue::topScore()
 {
 	return topHsd->_scorer->score();
 }

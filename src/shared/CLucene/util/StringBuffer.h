@@ -33,10 +33,10 @@ CL_NS_DEF(util)
    void append(const TCHAR* value, size_t appendedLength);
    ///Appends an integer (after conversion to a character string) with a default radix of 10. Radixes lower than 10 not supported.
    void appendInt(const int64_t value, const int32_t _Radix = 10);
-   ///Appends a float_t (after conversion to a character string)
-   void appendFloat(const float_t value, const size_t digits);
+   ///Appends a clucene_float_t (after conversion to a character string)
+   void appendFloat(const clucene_float_t value, const size_t digits);
    ///Appends a Lucene boost, formatted in the format used in the toString() functions; replaces JL's ToStringUtils::boost
-   void appendBoost(const float_t boost);
+   void appendBoost(const clucene_float_t boost);
    ///Appends a bool in the same way as java StringBuffer does (i.e. "true", "false" )
    void appendBool(const bool value);
    ///Puts a copy of the string value in front of the current string in the StringBuffer

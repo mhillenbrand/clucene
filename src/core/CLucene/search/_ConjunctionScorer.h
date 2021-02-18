@@ -18,7 +18,7 @@ private:
   typedef CL_NS(util)::CLVector<Scorer*,CL_NS(util)::Deletor::Object<Scorer> > ScorersType;
   bool firstTime;
   bool more;
-  float_t coord;
+  clucene_float_t coord;
   int32_t lastDoc;
 
   Scorer* last();
@@ -33,7 +33,7 @@ public:
   int32_t doc() const;
   bool next();
   bool skipTo(int32_t target);
-  virtual float_t score();
+  virtual clucene_float_t score();
   virtual Explanation* explain(int32_t doc);
 };
 

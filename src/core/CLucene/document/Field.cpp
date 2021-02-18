@@ -158,8 +158,8 @@ void Field::setValue(CL_NS(analysis)::TokenStream* value) {
 	valueType = VALUE_TOKENSTREAM;
 }
 
-void Field::setBoost(const float_t boost)	{ this->boost = boost; }
-float_t Field::getBoost() const				{ return boost; }
+void Field::setBoost(const clucene_float_t boost)	{ this->boost = boost; }
+clucene_float_t Field::getBoost() const				{ return boost; }
 
 void Field::setConfig(const uint32_t x){
 	uint32_t newConfig=0;

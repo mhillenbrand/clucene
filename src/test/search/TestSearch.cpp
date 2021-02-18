@@ -327,14 +327,14 @@ void testNormEncoding(CuTest *tc) {
 	//just a quick test of the default similarity
 	CLUCENE_ASSERT(CL_NS(search)::Similarity::getDefault()->queryNorm(1)==1.0);
 
-    float_t f = CL_NS(search)::Similarity::getDefault()->queryNorm(9);
+    clucene_float_t f = CL_NS(search)::Similarity::getDefault()->queryNorm(9);
     f -= (1.0/3.0);
     if ( f < 0 )
         f *= -1;
 	CLUCENE_ASSERT(f < 0.1);
 
     //test that div by zero is handled
-    float_t tmp = CL_NS(search)::Similarity::getDefault()->lengthNorm(_T("test"),0);
+    clucene_float_t tmp = CL_NS(search)::Similarity::getDefault()->lengthNorm(_T("test"),0);
     tmp = CL_NS(search)::Similarity::getDefault()->queryNorm(0);
 
 	//test that norm encoding is working properly

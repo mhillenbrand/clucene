@@ -22,7 +22,7 @@ public:
 	virtual ~FilteredTermEnum();
 
 	/** Equality measure on the term */
-	virtual float_t difference() = 0;
+	virtual clucene_float_t difference() = 0;
 
 	/** 
 	* Returns the docFreq of the current Term in the enumeration.

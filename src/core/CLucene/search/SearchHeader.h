@@ -38,7 +38,7 @@ CL_NS_DEF(search)
 		int32_t doc;
 
 		/** Expert: The score of this document for the query. */
-		float_t score;
+		clucene_float_t score;
 	};
 
 	/** Expert: Returned by low-level search implementations.
@@ -60,7 +60,7 @@ CL_NS_DEF(search)
 
 	private:
 		/** Expert: Stores the maximum score value encountered, needed for normalizing. */
-		//float_t maxScore;
+		//clucene_float_t maxScore;
 	};
 
     /** Lower-level search API.
@@ -94,7 +94,7 @@ CL_NS_DEF(search)
       * In other words, the score will not necessarily be a float whose value is
       * between 0 and 1.
       */
-      virtual void collect(const int32_t doc, const float_t score) = 0;
+      virtual void collect(const int32_t doc, const clucene_float_t score) = 0;
       virtual ~HitCollector(){}
     };
 
@@ -103,8 +103,8 @@ CL_NS_DEF(search)
    * <p>A Weight is constructed by a query, given a Searcher ({@link
    * Query#_createWeight(Searcher)}).  The {@link #sumOfSquaredWeights()} method
    * is then called on the top-level query to compute the query normalization
-   * factor (@link Similarity#queryNorm(float_t)}).  This factor is then passed to
-   * {@link #normalize(float_t)}.  At this point the weighting is complete and a
+   * factor (@link Similarity#queryNorm(clucene_float_t)}).  This factor is then passed to
+   * {@link #normalize(clucene_float_t)}.  At this point the weighting is complete and a
    * scorer may be constructed by calling {@link #scorer(IndexReader)}.
    */
 	class CLUCENE_EXPORT Weight
@@ -116,13 +116,13 @@ CL_NS_DEF(search)
       virtual Query* getQuery() = 0;
 
       /** The weight for this query. */
-      virtual float_t getValue() = 0;
+      virtual clucene_float_t getValue() = 0;
 
       /** The sum of squared weights of contained query clauses. */
-      virtual float_t sumOfSquaredWeights() = 0;
+      virtual clucene_float_t sumOfSquaredWeights() = 0;
 
       /** Assigns the query normalization factor to this. */
-      virtual void normalize(float_t norm) = 0;
+      virtual void normalize(clucene_float_t norm) = 0;
 
       /** Constructs a scorer for this. */
       virtual Scorer* scorer(CL_NS(index)::IndexReader* reader) = 0;
@@ -136,14 +136,14 @@ CL_NS_DEF(search)
    class CLUCENE_EXPORT HitDoc
    {
     public:
-		float_t score;
+		clucene_float_t score;
 		int32_t id;
 		CL_NS(document)::Document* doc;
 		
 		HitDoc* next;					  // in doubly-linked cache
 		HitDoc* prev;					  // in doubly-linked cache
 		
-		HitDoc(const float_t s, const int32_t i);
+		HitDoc(const clucene_float_t s, const int32_t i);
 		virtual ~HitDoc();
     };
 

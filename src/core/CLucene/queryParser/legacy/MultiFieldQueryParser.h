@@ -13,7 +13,7 @@
 CL_NS_DEF2(queryParser,legacy)
 
   typedef CL_NS(util)::CLHashMap<const TCHAR*,
-           float_t,
+           clucene_float_t,
            CL_NS(util)::Compare::TChar,
            CL_NS(util)::Equals::TChar,
            CL_NS(util)::Deletor::Dummy,

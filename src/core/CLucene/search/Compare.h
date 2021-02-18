@@ -59,10 +59,10 @@ public:
 	};
 
 	class CLUCENE_EXPORT Float:public ScoreDocComparator {
-		float_t* fieldOrder;
+		clucene_float_t* fieldOrder;
 		int32_t length;
 	public:
-		Float(float_t* fieldOrder, int32_t len);
+		Float(clucene_float_t* fieldOrder, int32_t len);
 		int32_t compare (struct ScoreDoc* i, struct ScoreDoc* j);
 		CL_NS(util)::Comparable* sortValue (struct ScoreDoc* i);
 		int32_t sortType();

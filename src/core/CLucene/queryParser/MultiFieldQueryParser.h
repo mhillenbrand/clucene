@@ -14,7 +14,7 @@
 CL_NS_DEF(queryParser)
 
 typedef CL_NS(util)::CLHashMap<TCHAR*,
-                               float_t,
+                               clucene_float_t,
                                CL_NS(util)::Compare::TChar,
                                CL_NS(util)::Equals::TChar,
                                CL_NS(util)::Deletor::Dummy,
@@ -65,7 +65,7 @@ public:
 protected:
   CL_NS(search)::Query* getFieldQuery(const TCHAR* field, TCHAR* queryText, const int32_t slop);
   CL_NS(search)::Query* getFieldQuery(const TCHAR* field, TCHAR* queryText) { return getFieldQuery(field,queryText,0); }
-  CL_NS(search)::Query* getFuzzyQuery(const TCHAR* field, TCHAR* termStr, const float_t minSimilarity);
+  CL_NS(search)::Query* getFuzzyQuery(const TCHAR* field, TCHAR* termStr, const clucene_float_t minSimilarity);
   CL_NS(search)::Query* getPrefixQuery(const TCHAR* field, TCHAR* termStr);
   CL_NS(search)::Query* getWildcardQuery(const TCHAR* field, TCHAR* termStr);
   CL_NS(search)::Query* getRangeQuery(const TCHAR* field, TCHAR* part1, TCHAR* part2, const bool inclusive);

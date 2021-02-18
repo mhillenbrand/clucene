@@ -231,7 +231,7 @@ public:
    *  level.  A level is computed by taking the max segment
    *  log size, minuse LEVEL_LOG_SPAN, and finding all
    *  segments falling within that range. */
-  static const float_t LEVEL_LOG_SPAN;
+  static const clucene_float_t LEVEL_LOG_SPAN;
 
   /** Default merge factor, which is how many segments are
    *  merged at a time */
@@ -384,11 +384,11 @@ protected:
 
 public:
   /** Default minimum segment size.  @see setMinMergeMB */
-  static const float_t DEFAULT_MIN_MERGE_MB;
+  static const clucene_float_t DEFAULT_MIN_MERGE_MB;
 
   /** Default maximum segment size.  A segment of this size
    *  or larger will never be merged.  @see setMaxMergeMB */
-  static const float_t DEFAULT_MAX_MERGE_MB;
+  static const clucene_float_t DEFAULT_MAX_MERGE_MB;
 
   LogByteSizeMergePolicy();
 
@@ -403,13 +403,13 @@ public:
    *  <p>Note that {@link #setMaxMergeDocs} is also
    *  used to check whether a segment is too large for
    *  merging (it's either or).</p>*/
-  void setMaxMergeMB(float_t mb);
+  void setMaxMergeMB(clucene_float_t mb);
 
   /** Returns the largest segment (meaured by total byte
    *  size of the segment's files, in MB) that may be merged
    *  with other segments.
    *  @see #setMaxMergeMB */
-  float_t getMaxMergeMB();
+  clucene_float_t getMaxMergeMB();
 
   /** Sets the minimum size for the lowest level segments.
    * Any segments below this size are considered to be on
@@ -420,12 +420,12 @@ public:
    * single level.  If you set this too large, it could
    * greatly increase the merging cost during indexing (if
    * you flush many small segments). */
-  void setMinMergeMB(float_t mb);
+  void setMinMergeMB(clucene_float_t mb);
 
   /** Get the minimum size for a segment to remain
    *  un-merged.
    *  @see #setMinMergeMB **/
-  float_t getMinMergeMB();
+  clucene_float_t getMinMergeMB();
 
   static const char* getClassName();
   virtual const char* getObjectName() const;

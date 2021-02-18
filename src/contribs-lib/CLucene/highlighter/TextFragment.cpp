@@ -30,12 +30,12 @@ CL_NS_USE(util)
 	TextFragment::~TextFragment(){
 	}
 
-	void TextFragment::setScore(float_t score)
+	void TextFragment::setScore(clucene_float_t score)
 	{
 		_score=score;
 	}
 
-	float_t TextFragment::getScore() const
+	clucene_float_t TextFragment::getScore() const
 	{
 		return _score;
 	}

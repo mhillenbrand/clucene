@@ -80,7 +80,7 @@ CL_NS_USE(analysis)
 		
 	}
 	
-	float_t QueryScorer::getTokenScore(Token * token)
+	clucene_float_t QueryScorer::getTokenScore(Token * token)
 	{
 		const TCHAR* termText=token->termBuffer();
 		
@@ -105,13 +105,13 @@ CL_NS_USE(analysis)
   	* @return The highest weighted term (useful for passing to GradientFormatter to set
   	* top end of coloring scale.
   	*/
-	float_t QueryScorer::getMaxTermWeight()
+	clucene_float_t QueryScorer::getMaxTermWeight()
 	{
   		return _maxTermWeight;
 	}
 
 
-	float_t QueryScorer::getFragmentScore(){
+	clucene_float_t QueryScorer::getFragmentScore(){
 		return _totalScore;
 	}
 

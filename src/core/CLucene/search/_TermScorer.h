@@ -22,7 +22,7 @@ private:
 	CL_NS(index)::TermDocs* termDocs;
 	uint8_t* norms;
 	Weight* weight;
-	const float_t weightValue;
+	const clucene_float_t weightValue;
 	int32_t _doc;
 
 	int32_t docs[32];	  // buffered doc numbers
@@ -30,7 +30,7 @@ private:
 	int32_t pointer;
 	int32_t pointerMax;
 
-	float_t scoreCache[LUCENE_SCORE_CACHE_SIZE];
+	clucene_float_t scoreCache[LUCENE_SCORE_CACHE_SIZE];
 public:
 
 	/** Construct a <code>TermScorer</code>.
@@ -58,7 +58,7 @@ public:
 	*/
 	bool next();
 
-	float_t score();
+	clucene_float_t score();
 
 	/** Skips to the first match beyond the current whose document number is
 	* greater than or equal to a given target. 

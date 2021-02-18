@@ -289,7 +289,7 @@ private:
     int32_t upto;
 
     BufferedNorms();
-    void add(float_t norm);
+    void add(clucene_float_t norm);
     void reset();
     void fill(int32_t docID);
   };
@@ -438,7 +438,7 @@ private:
       int32_t position;
       int32_t length;
       int32_t offset;
-      float_t boost;
+      clucene_float_t boost;
       bool doNorms;
       bool doVectors;
       bool doVectorPositions;
@@ -477,7 +477,7 @@ private:
     CL_NS(util)::ValueArray<int32_t> vectorFieldNumbers;
 
     int32_t numStoredFields;                  // How many stored fields in current doc
-    float_t docBoost;                       // Boost for current doc
+    clucene_float_t docBoost;                       // Boost for current doc
 
     CL_NS(util)::ValueArray<FieldData*> fieldDataArray;           // Fields touched by current doc
     int32_t numFieldData;                     // How many fields in current doc
@@ -777,9 +777,9 @@ public:
   void setInfoStream(std::ostream* infoStream);
 
   /** Set how much RAM we can use before flushing. */
-  void setRAMBufferSizeMB(float_t mb);
+  void setRAMBufferSizeMB(clucene_float_t mb);
 
-  float_t getRAMBufferSizeMB();
+  clucene_float_t getRAMBufferSizeMB();
 
   /** Set max buffered docs, which means we will flush by
    *  doc count instead of by RAM usage. */

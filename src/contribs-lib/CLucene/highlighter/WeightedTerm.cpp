@@ -21,7 +21,7 @@
 
 CL_NS_DEF2(search,highlight)
 
-	WeightedTerm::WeightedTerm (float_t weight,const TCHAR* term)
+	WeightedTerm::WeightedTerm (clucene_float_t weight,const TCHAR* term)
 	{
 		_weight=weight;
 		_term = stringDuplicate(term);
@@ -54,7 +54,7 @@ CL_NS_DEF2(search,highlight)
 	/**
 	 * @return the weight associated with this term
 	 */
-	float_t WeightedTerm::getWeight() const 
+	clucene_float_t WeightedTerm::getWeight() const 
 	{
 		return _weight;
 	}
@@ -72,7 +72,7 @@ CL_NS_DEF2(search,highlight)
 	/**
 	 * @param weight the weight associated with this term
 	 */
-	void WeightedTerm::setWeight(float_t weight) {
+	void WeightedTerm::setWeight(clucene_float_t weight) {
 		this->_weight = _weight;
 		cachedHashCode = 0;
 	}

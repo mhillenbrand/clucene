@@ -120,7 +120,7 @@ private:
   CL_NS(analysis)::Analyzer* analyzer;
   TCHAR* field;
   int32_t phraseSlop;
-  float_t fuzzyMinSim;
+  clucene_float_t fuzzyMinSim;
   int32_t fuzzyPrefixLength;
   //TODO: Locale locale = Locale.getDefault();
 
@@ -167,13 +167,13 @@ public:
   /**
   * Get the minimal similarity for fuzzy queries.
   */
-  float_t getFuzzyMinSim() const;
+  clucene_float_t getFuzzyMinSim() const;
 
   /**
   * Set the minimum similarity for fuzzy queries.
   * Default is 0.5f.
   */
-  void setFuzzyMinSim(const float_t _fuzzyMinSim);
+  void setFuzzyMinSim(const clucene_float_t _fuzzyMinSim);
 
   /**
   * Get the prefix length for fuzzy queries.
@@ -412,7 +412,7 @@ protected:
   * @return Resulting {@link Query} built for the term
   * @exception ParseException throw in overridden method to disallow
   */
-  virtual CL_NS(search)::Query* getFuzzyQuery(const TCHAR* _field, TCHAR* termStr, const float_t minSimilarity);
+  virtual CL_NS(search)::Query* getFuzzyQuery(const TCHAR* _field, TCHAR* termStr, const clucene_float_t minSimilarity);
 
 private:
   /**

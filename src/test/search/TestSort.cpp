@@ -20,8 +20,8 @@ Query* sort_queryF;
 Sort* _sort;
 SimpleAnalyzer sort_analyser;
 
-typedef StringMap<TCHAR*, float_t> sortScores;
-typedef std::pair<TCHAR*,float_t> scorePair;
+typedef StringMap<TCHAR*, clucene_float_t> sortScores;
+typedef std::pair<TCHAR*,clucene_float_t> scorePair;
 
 // document data:
 // the tracer field is used to determine which document was hit
@@ -126,17 +126,17 @@ void sortMatches (CuTest *tc, Searcher* searcher, Query* query, Sort* sort, cons
 void sortSameValues (CuTest* tc, sortScores* m1, sortScores* m2, bool deleteM1=false, bool deleteM2=true) {
 	CuAssertIntEquals (tc, _T("sortScores size not equal"),m1->size(), m2->size());
 	sortScores::iterator iter = m1->begin();
-	float_t m=pow(10.0,-8);
+	clucene_float_t m=pow(10.0,-8);
 	while (iter != m1->end()) {
 		TCHAR* key = iter->first;
 
 		sortScores::iterator i1 = m1->find(key);
 		sortScores::iterator i2 = m2->find(key);
 
-		float_t f1 = i1->second;
-		float_t f2 = i2->second;
+		clucene_float_t f1 = i1->second;
+		clucene_float_t f2 = i2->second;
 
-		float_t diff = f1-f2;
+		clucene_float_t diff = f1-f2;
 		if ( diff < 0 )
 		    diff *= -1;
 		if ( diff>m )
@@ -238,7 +238,7 @@ void sort_runMultiSorts (CuTest* tc, Searcher* multi) {
  sortScores* sort_getScores (CuTest* tc, Hits* hits, bool deleteHits=true){
 	sortScores* scoreMap = _CLNEW sortScores(true);
 	int n = hits->length();
-	float_t m=pow(10.0,-8);
+	clucene_float_t m=pow(10.0,-8);
 
 	for (int i=0; i<n; ++i) {
 		Document& doc = hits->doc(i);
@@ -253,7 +253,7 @@ void sort_runMultiSorts (CuTest* tc, Searcher* multi) {
 		if ( scoreMap->find(v[0]) != scoreMap->end () ){
 			//this (should) be a multi search... the document will be double, so here we check that
 			//the existing value is the same as this value... and then delete and ignore it.
-			float_t diff = scoreMap->find(v[0])->second - hits->score(i);
+			clucene_float_t diff = scoreMap->find(v[0])->second - hits->score(i);
 			if ( diff < 0 )
 				diff *= -1;
 			if ( diff>m )

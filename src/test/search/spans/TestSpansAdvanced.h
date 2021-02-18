@@ -41,7 +41,7 @@ protected:
     /**
      * Tests two span queries.
      */
-    void doTestBooleanQueryWithSpanQueries( const float_t expectedScore );
+    void doTestBooleanQueryWithSpanQueries( const clucene_float_t expectedScore );
 
     /**
      * Checks to see if the hits are what we expected.
@@ -53,7 +53,7 @@ protected:
      *
      * @throws IOException
      */
-    void assertHits( Query * query, const TCHAR * description, const TCHAR ** expectedIds, float_t * expectedScores, size_t expectedCount );
+    void assertHits( Query * query, const TCHAR * description, const TCHAR ** expectedIds, clucene_float_t * expectedScores, size_t expectedCount );
 };
 #endif
 

@@ -67,7 +67,7 @@ CL_NS_DEF(search)
       close();
     }
 
-    float_t WildcardTermEnum::difference() {
+    clucene_float_t WildcardTermEnum::difference() {
         return 1.0f;
     }
 

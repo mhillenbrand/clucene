@@ -44,7 +44,7 @@ CL_NS_DEF(search)
   class CLUCENE_EXPORT Query : public CL_NS(util)::NamedObject {
 	private:
 		// query boost factor
-		float_t boost;
+		clucene_float_t boost;
 	protected:
         Query();
         Query(const Query& clone);
@@ -55,13 +55,13 @@ CL_NS_DEF(search)
 		* matching this clause will (in addition to the normal weightings) have
 		* their score multiplied by <code>b</code>.
 		*/
-		void setBoost(float_t b);
+		void setBoost(clucene_float_t b);
 
 		/** Gets the boost for this clause.  Documents matching
 		* this clause will (in addition to the normal weightings) have their score
 		* multiplied by <code>b</code>.   The boost is 1.0 by default.
 		*/
-		float_t getBoost() const;
+		clucene_float_t getBoost() const;
 
         /** Expert: Constructs an initializes a Weight for a top-level query. */
         Weight* weight(Searcher* searcher);

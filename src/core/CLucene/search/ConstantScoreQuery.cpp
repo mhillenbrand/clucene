@@ -23,7 +23,7 @@ CL_NS_DEF(search)
 
 class ConstantScorer : public Scorer {
     BitSet* bits;
-    const float_t theScore;
+    const clucene_float_t theScore;
     int32_t _doc;
     bool shouldDelete;
 
@@ -47,7 +47,7 @@ public:
         return _doc;
     }
 
-    float_t score() {
+    clucene_float_t score() {
         return theScore;
     }
 
@@ -70,8 +70,8 @@ public:
 class ConstantWeight : public Weight {
 private:
     Similarity* similarity;
-    float_t queryNorm;
-    float_t queryWeight;
+    clucene_float_t queryNorm;
+    clucene_float_t queryWeight;
     const ConstantScoreQuery* parentQuery;
 
 public:
@@ -87,16 +87,16 @@ public:
         return (Query*)parentQuery;
     }
 
-    float_t getValue() {
+    clucene_float_t getValue() {
         return queryWeight;
     }
 
-    float_t sumOfSquaredWeights() {
+    clucene_float_t sumOfSquaredWeights() {
         queryWeight = parentQuery->getBoost();
         return queryWeight * queryWeight;
     }
 
-    void normalize(float_t norm) {
+    void normalize(clucene_float_t norm) {
         this->queryNorm = norm;
         queryWeight *= this->queryNorm;
     }

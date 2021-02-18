@@ -46,7 +46,7 @@ std::ostream* IndexWriter::defaultInfoStream = NULL;
 const int32_t IndexWriter::MERGE_READ_BUFFER_SIZE = 4096;
 const int32_t IndexWriter::DISABLE_AUTO_FLUSH = -1;
 const int32_t IndexWriter::DEFAULT_MAX_BUFFERED_DOCS = DISABLE_AUTO_FLUSH;
-const float_t IndexWriter::DEFAULT_RAM_BUFFER_SIZE_MB = 16.0;
+const clucene_float_t IndexWriter::DEFAULT_RAM_BUFFER_SIZE_MB = 16.0;
 const int32_t IndexWriter::DEFAULT_MAX_BUFFERED_DELETE_TERMS = DISABLE_AUTO_FLUSH;
 const int32_t IndexWriter::DEFAULT_MAX_MERGE_DOCS = LogDocMergePolicy::DEFAULT_MAX_MERGE_DOCS;
 const int32_t IndexWriter::DEFAULT_MERGE_FACTOR = LogMergePolicy::DEFAULT_MERGE_FACTOR;
@@ -373,7 +373,7 @@ int32_t IndexWriter::getMaxBufferedDocs() {
   return docWriter->getMaxBufferedDocs();
 }
 
-void IndexWriter::setRAMBufferSizeMB(float_t mb) {
+void IndexWriter::setRAMBufferSizeMB(clucene_float_t mb) {
   if ( (int32_t)mb != DISABLE_AUTO_FLUSH && mb <= 0.0)
     _CLTHROWA(CL_ERR_IllegalArgument,
         "ramBufferSize should be > 0.0 MB when enabled");
@@ -386,7 +386,7 @@ void IndexWriter::setRAMBufferSizeMB(float_t mb) {
   }
 }
 
-float_t IndexWriter::getRAMBufferSizeMB() {
+clucene_float_t IndexWriter::getRAMBufferSizeMB() {
   return docWriter->getRAMBufferSizeMB();
 }
 

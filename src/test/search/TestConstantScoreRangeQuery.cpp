@@ -105,7 +105,7 @@ public:
         pResult = pSearch->search( q );
         size_t numHits = pResult->length();
         assertEqualsMsg( _T( "wrong number of results" ), 6, numHits );
-        float_t score = pResult->score( 0 );
+        clucene_float_t score = pResult->score( 0 );
         for( size_t i = 1; i < numHits; i++ )
         {
             assertTrueMsg( _T( "score was not the same" ), score == pResult->score( i ));

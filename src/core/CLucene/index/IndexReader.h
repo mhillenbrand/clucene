@@ -245,7 +245,7 @@ public:
 	*
 	* The number of bytes returned is the size of the IndexReader->maxDoc()
 	*
-	* @see Field#setBoost(float_t)
+	* @see Field#setBoost(clucene_float_t)
 	* @memory The values are cached, so don't delete the returned byte array.
 	*/
 	virtual uint8_t* norms(const TCHAR* field) = 0;
@@ -256,7 +256,7 @@ public:
 	*
 	* The size of bytes must be the size of the IndexReader->maxDoc()
 	*
-	* @see Field#setBoost(float_t)
+	* @see Field#setBoost(clucene_float_t)
 	*/
 	virtual void norms(const TCHAR* field, uint8_t* bytes) = 0;
 
@@ -274,11 +274,11 @@ public:
   *  be obtained)
   * @throws IOException if there is a low-level IO error
   */
-  void setNorm(int32_t doc, const TCHAR* field, float_t value);
+  void setNorm(int32_t doc, const TCHAR* field, clucene_float_t value);
 
   /** Expert: Resets the normalization factor for the named field of the named
   * document.  The norm represents the product of the field's {@link
-  * Field#setBoost(float_t) boost} and its {@link Similarity#lengthNorm(TCHAR*,
+  * Field#setBoost(clucene_float_t) boost} and its {@link Similarity#lengthNorm(TCHAR*,
   * int32_t) length normalization}.  Thus, to preserve the length normalization
   * values when resetting this, one should base the new value upon the old.
   *

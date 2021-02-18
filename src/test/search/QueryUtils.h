@@ -14,7 +14,7 @@ class QueryUtils
 public:
     static int32_t skip_op;
     static int32_t next_op;
-    static float_t maxDiff;
+    static clucene_float_t maxDiff;
 
 public:
     /** Check the types of things query objects should be able to do. */

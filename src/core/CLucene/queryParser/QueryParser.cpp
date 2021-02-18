@@ -174,11 +174,11 @@ const TCHAR* QueryParser::getField() const {
   return field;
 }
 
-float_t QueryParser::getFuzzyMinSim() const {
+clucene_float_t QueryParser::getFuzzyMinSim() const {
   return fuzzyMinSim;
 }
 
-void QueryParser::setFuzzyMinSim(const float_t _fuzzyMinSim) {
+void QueryParser::setFuzzyMinSim(const clucene_float_t _fuzzyMinSim) {
   fuzzyMinSim = _fuzzyMinSim;
 }
 
@@ -537,7 +537,7 @@ Query* QueryParser::getPrefixQuery(const TCHAR* _field, TCHAR* _termStr)
   return q;
 }
 
-Query* QueryParser::getFuzzyQuery(const TCHAR* _field, TCHAR* termStr, const float_t minSimilarity)
+Query* QueryParser::getFuzzyQuery(const TCHAR* _field, TCHAR* termStr, const clucene_float_t minSimilarity)
 {
   if (lowercaseExpandedTerms) {
     _tcslwr(termStr);
@@ -847,7 +847,7 @@ Query* QueryParser::fClause(TCHAR* _field) {
   }
   _CLDELETE_LCARRAY(tmpField);
   if (q && boost != NULL) {
-    float_t f = 1.0;
+    clucene_float_t f = 1.0;
     try {
       f = _tcstod(boost->image, NULL);
       q->setBoost(f);
@@ -930,7 +930,7 @@ Query* QueryParser::fTerm(const TCHAR* _field) {
         termImage[tiLen-1]=0;
         q = getPrefixQuery(_field,discardEscapeChar(termImage, termImage));
       } else if (fuzzy) {
-        float_t fms = fuzzyMinSim;
+        clucene_float_t fms = fuzzyMinSim;
         try {
           if (fuzzySlop->image[1] != 0)
             fms = _tcstod(fuzzySlop->image + 1, NULL);
@@ -1103,7 +1103,7 @@ Query* QueryParser::fTerm(const TCHAR* _field) {
     }
   }
   if (boost != NULL) {
-    float_t f = 1.0;
+    clucene_float_t f = 1.0;
     try {
       f = _tcstod(boost->image, NULL);
     }

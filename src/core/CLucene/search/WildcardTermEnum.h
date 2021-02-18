@@ -47,7 +47,7 @@ CL_NS_DEF(search)
         WildcardTermEnum(CL_NS(index)::IndexReader* reader, CL_NS(index)::Term* term);
         ~WildcardTermEnum();
 
-        float_t difference() ;
+        clucene_float_t difference() ;
 
         bool endEnum() ;
 

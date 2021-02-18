@@ -87,8 +87,8 @@ public:
 	 * IOException on the first write to an OutputStream based
 	 * on this probability.
 	 */ 
-	void setRandomIOExceptionRate(float_t rate, int32_t seed);
-	float_t getRandomIOExceptionRate() const;
+	void setRandomIOExceptionRate(clucene_float_t rate, int32_t seed);
+	clucene_float_t getRandomIOExceptionRate() const;
 
 	void maybeThrowIOException();
 
@@ -115,7 +115,7 @@ private:
 	bool noDeleteOpenFile;
 	int64_t maxUsedSize;
 	int64_t maxSize;
-	float_t randomIOExceptionRate;
+	clucene_float_t randomIOExceptionRate;
 };
 
 /**

@@ -38,10 +38,10 @@ CL_NS_DEF(search)
 	class PhraseWeight: public Weight {
 	private:
 		Searcher* searcher;
-		float_t value;
-		float_t idf;
-		float_t queryNorm;
-		float_t queryWeight;
+		clucene_float_t value;
+		clucene_float_t idf;
+		clucene_float_t queryNorm;
+		clucene_float_t queryWeight;
 
 		PhraseQuery* parentQuery;
 	public:
@@ -50,10 +50,10 @@ CL_NS_DEF(search)
 		TCHAR* toString();
 
 		Query* getQuery();
-		float_t getValue();
+		clucene_float_t getValue();
 
-		float_t sumOfSquaredWeights();
-		void normalize(float_t queryNorm);
+		clucene_float_t sumOfSquaredWeights();
+		void normalize(clucene_float_t queryNorm);
 		Scorer* scorer(CL_NS(index)::IndexReader* reader);
 		Explanation* explain(CL_NS(index)::IndexReader* reader, int32_t doc);
 		TCHAR* toString(TCHAR* f);
@@ -297,15 +297,15 @@ void PhraseQuery::extractTerms( TermSet * termset ) const
 
 
  Query* PhraseWeight::getQuery() { return parentQuery; }
- float_t PhraseWeight::getValue() { return value; }
+ clucene_float_t PhraseWeight::getValue() { return value; }
 
- float_t PhraseWeight::sumOfSquaredWeights(){
+ clucene_float_t PhraseWeight::sumOfSquaredWeights(){
    idf = parentQuery->getSimilarity(searcher)->idf(parentQuery->terms, searcher);
    queryWeight = idf * parentQuery->getBoost();    // compute query weight
    return queryWeight * queryWeight;         // square it
  }
 
- void PhraseWeight::normalize(float_t queryNorm) {
+ void PhraseWeight::normalize(clucene_float_t queryNorm) {
    this->queryNorm = queryNorm;
    queryWeight *= queryNorm;                   // normalize query weight
    value = queryWeight * idf;                  // idf for document
@@ -454,7 +454,7 @@ void PhraseQuery::extractTerms( TermSet * termset ) const
 
 	  Explanation* fieldNormExpl = _CLNEW Explanation();
 	  uint8_t* fieldNorms = reader->norms(parentQuery->field);
-	  float_t fieldNorm =
+	  clucene_float_t fieldNorm =
 		  fieldNorms!=NULL ? Similarity::decodeNorm(fieldNorms[doc]) : 0.0f;
 	  fieldNormExpl->setValue(fieldNorm);
 

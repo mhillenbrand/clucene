@@ -27,12 +27,12 @@ CL_NS_DEF2(search,highlight)
 class CLUCENE_CONTRIBS_EXPORT WeightedTerm:LUCENE_BASE
 {
 private:
-	float_t _weight; // multiplier
+	clucene_float_t _weight; // multiplier
 	TCHAR* _term; //stemmed form
 	size_t cachedHashCode;
 	WeightedTerm(const WeightedTerm& other);
 public:
-	WeightedTerm (float_t weight,const TCHAR* term);
+	WeightedTerm (clucene_float_t weight,const TCHAR* term);
 	~WeightedTerm();
 
 	/**
@@ -43,7 +43,7 @@ public:
 	/**
 	 * @return the weight associated with this term
 	 */
-	float_t getWeight() const ;
+	clucene_float_t getWeight() const ;
 
 	/**
 	 * @param term the term value (stemmed)
@@ -52,7 +52,7 @@ public:
 	/**
 	 * @param weight the weight associated with this term
 	 */
-	void setWeight(float_t weight);
+	void setWeight(clucene_float_t weight);
 
 	size_t hashCode();
 	WeightedTerm* clone() const;

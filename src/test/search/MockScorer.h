@@ -74,7 +74,7 @@ public:
         return NULL;
     }
 
-    virtual float_t score()
+    virtual clucene_float_t score()
     {
         pCounters->scoreCalls++;
         return 0;

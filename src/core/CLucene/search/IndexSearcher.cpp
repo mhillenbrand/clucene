@@ -29,13 +29,13 @@ CL_NS_DEF(search)
 
 	class SimpleTopDocsCollector:public HitCollector{ 
 	private:
-		float_t minScore;
+		clucene_float_t minScore;
 		const CL_NS(util)::BitSet* bits;
 		HitQueue* hq;
 		size_t nDocs;
 		int32_t* totalHits;
 	public:
-		SimpleTopDocsCollector(const CL_NS(util)::BitSet* bs, HitQueue* hitQueue, int32_t* totalhits, size_t ndocs, const float_t ms=-1.0f):
+		SimpleTopDocsCollector(const CL_NS(util)::BitSet* bs, HitQueue* hitQueue, int32_t* totalhits, size_t ndocs, const clucene_float_t ms=-1.0f):
     		minScore(ms),
     		bits(bs),
     		hq(hitQueue),
@@ -44,7 +44,7 @@ CL_NS_DEF(search)
     	{
     	}
 		~SimpleTopDocsCollector(){}
-		void collect(const int32_t doc, const float_t score){
+		void collect(const int32_t doc, const clucene_float_t score){
     		if (score > 0.0f &&			  // ignore zeroed buckets
     			(bits==NULL || bits->get(doc))) {	  // skip docs not in bits
     			++totalHits[0];
@@ -74,7 +74,7 @@ CL_NS_DEF(search)
     	}
 		~SortedTopDocsCollector(){
 		}
-		void collect(const int32_t doc, const float_t score){
+		void collect(const int32_t doc, const clucene_float_t score){
     		if (score > 0.0f &&			  // ignore zeroed buckets
     			(bits==NULL || bits->get(doc))) {	  // skip docs not in bits
     			++totalHits[0];
@@ -98,7 +98,7 @@ CL_NS_DEF(search)
 		~SimpleFilteredCollector(){
 		}
 	protected:
-		void collect(const int32_t doc, const float_t score){
+		void collect(const int32_t doc, const clucene_float_t score){
             if (bits->get(doc)) {		  // skip docs not in bits
                 results->collect(doc, score);
             }

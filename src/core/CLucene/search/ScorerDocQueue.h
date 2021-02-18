@@ -37,7 +37,7 @@ public:
 	
 	Scorer* top();
 	int32_t topDoc();
-	float_t topScore();
+	clucene_float_t topScore();
 	bool topNextAndAdjustElsePop();
 	bool topSkipToAndAdjustElsePop( int32_t target );
 	

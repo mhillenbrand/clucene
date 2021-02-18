@@ -30,7 +30,7 @@ class CLUCENE_CONTRIBS_EXPORT TokenGroup: LUCENE_BASE
 {
 	LUCENE_STATIC_CONSTANT(int32_t,MAX_NUM_TOKENS_PER_GROUP=50);
 	CL_NS(analysis)::Token* tokens;
-	float_t scores[MAX_NUM_TOKENS_PER_GROUP];
+	clucene_float_t scores[MAX_NUM_TOKENS_PER_GROUP];
 	int32_t numTokens;
 	int32_t startOffset;
 	int32_t endOffset;
@@ -39,7 +39,7 @@ public:
 	TokenGroup(void);
 	~TokenGroup(void);
 
-	void addToken(CL_NS(analysis)::Token* token, float_t score);
+	void addToken(CL_NS(analysis)::Token* token, clucene_float_t score);
 
 	/**
 	 * 
@@ -53,7 +53,7 @@ public:
 	 * @param index a value between 0 and numTokens -1
 	 * @return the "n"th score
 	 */
-	float_t getScore(int32_t index) const;
+	clucene_float_t getScore(int32_t index) const;
 
 	/**
 	 * @return the end position in the original text
@@ -73,7 +73,7 @@ public:
 	/**
 	 * @return all tokens' scores summed up
 	 */
-	float_t getTotalScore() const;
+	clucene_float_t getTotalScore() const;
 
 	bool isDistinct(CL_NS(analysis)::Token* token)  const;
 	void clear();

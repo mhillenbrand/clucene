@@ -27,7 +27,7 @@ CL_NS_DEF(search)
 #define min3(a, b, c) __t = (a < b) ? a : b; __t = (__t < c) ? __t : c;
 
 
-	FuzzyTermEnum::FuzzyTermEnum(IndexReader* reader, Term* term, float_t minSimilarity, size_t _prefixLength):
+	FuzzyTermEnum::FuzzyTermEnum(IndexReader* reader, Term* term, clucene_float_t minSimilarity, size_t _prefixLength):
 		FilteredTermEnum(),d(NULL),dLen(0),_similarity(0),_endEnum(false),searchTerm(_CL_POINTER(term)),
 		text(NULL),textLen(0),prefix(NULL)/* ISH: was STRDUP_TtoT(LUCENE_BLANK_STRING)*/,prefixLength(0),
 		minimumSimilarity(minSimilarity)
@@ -135,20 +135,20 @@ CL_NS_DEF(search)
 		return false;
 	}
 
-	float_t FuzzyTermEnum::difference() {
-		return (float_t)((_similarity - minimumSimilarity) * scale_factor );
+	clucene_float_t FuzzyTermEnum::difference() {
+		return (clucene_float_t)((_similarity - minimumSimilarity) * scale_factor );
 	}
 
 	// TODO: had synchronized in definition
-	float_t FuzzyTermEnum::similarity(const TCHAR* target, const size_t m) {
+	clucene_float_t FuzzyTermEnum::similarity(const TCHAR* target, const size_t m) {
 		const size_t n = textLen; // TODO: remove after replacing n with textLen
 		if (n == 0)  {
 			//we don't have anything to compare.  That means if we just add
 			//the letters for m we get the new word
-			return prefixLength == 0 ? 0.0f : 1.0f - ((float_t) m / prefixLength);
+			return prefixLength == 0 ? 0.0f : 1.0f - ((clucene_float_t) m / prefixLength);
 		}
 		if (m == 0) {
-			return prefixLength == 0 ? 0.0f : 1.0f - ((float_t) n / prefixLength);
+			return prefixLength == 0 ? 0.0f : 1.0f - ((clucene_float_t) n / prefixLength);
 		}
 
 		const uint32_t maxDistance = getMaxDistance(m);
@@ -223,7 +223,7 @@ CL_NS_DEF(search)
 		// but this was the formula that was previously used in FuzzyTermEnum,
 		// so it has not been changed (even though minimumSimilarity must be
 		// greater than 0.0)
-		return 1.0f - ((float_t)d[n + m*dWidth] / (float_t) (prefixLength + cl_min(n, m)));
+		return 1.0f - ((clucene_float_t)d[n + m*dWidth] / (clucene_float_t) (prefixLength + cl_min(n, m)));
 	}
 
 	int32_t FuzzyTermEnum::getMaxDistance(const size_t m) {
@@ -244,9 +244,9 @@ CL_NS_DEF(search)
   class ScoreTerm {
   public:
 	  Term* term;
-	  float_t score;
+	  clucene_float_t score;
 
-	  ScoreTerm(Term* _term, float_t _score):term(_term),score(_score){
+	  ScoreTerm(Term* _term, clucene_float_t _score):term(_term),score(_score){
 	  }
 	  virtual ~ScoreTerm(){
           _CLLDECDELETE(term);
@@ -271,7 +271,7 @@ CL_NS_DEF(search)
   };
 
 
-  FuzzyQuery::FuzzyQuery(Term* term, float_t _minimumSimilarity, size_t _prefixLength):
+  FuzzyQuery::FuzzyQuery(Term* term, clucene_float_t _minimumSimilarity, size_t _prefixLength):
     MultiTermQuery(term),
     minimumSimilarity(_minimumSimilarity),
     prefixLength(_prefixLength)
@@ -287,13 +287,13 @@ CL_NS_DEF(search)
 		  _CLTHROWA(CL_ERR_IllegalArgument,"minimumSimilarity < 0");
   }
 
-  float_t FuzzyQuery::defaultMinSimilarity = 0.5f;
+  clucene_float_t FuzzyQuery::defaultMinSimilarity = 0.5f;
   int32_t FuzzyQuery::defaultPrefixLength = 0;
 
   FuzzyQuery::~FuzzyQuery(){
   }
 
-  float_t FuzzyQuery::getMinSimilarity() const {
+  clucene_float_t FuzzyQuery::getMinSimilarity() const {
     return minimumSimilarity;
   }
 
@@ -382,7 +382,7 @@ CL_NS_DEF(search)
 
 	  try {
 		  do {
-			  float_t score = 0.0f;
+			  clucene_float_t score = 0.0f;
 			  Term* t = enumerator->term();
 			  if (t != NULL) {
 				  score = enumerator->difference();

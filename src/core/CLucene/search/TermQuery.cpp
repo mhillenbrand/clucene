@@ -28,10 +28,10 @@ CL_NS_DEF(search)
 	class TermWeight: public Weight {
 	private:
 		Similarity* similarity; // ISH: was Searcher*, for no apparent reason
-		float_t value;
-		float_t idf;
-		float_t queryNorm;
-		float_t queryWeight;
+		clucene_float_t value;
+		clucene_float_t idf;
+		clucene_float_t queryNorm;
+		clucene_float_t queryWeight;
 
 		TermQuery* parentQuery;	// CLucene specific
 		CL_NS(index)::Term* _term;
@@ -43,10 +43,10 @@ CL_NS_DEF(search)
 		// return a *new* string describing this object
 		TCHAR* toString();
 		Query* getQuery() { return (Query*)parentQuery; }
-		float_t getValue() { return value; }
+		clucene_float_t getValue() { return value; }
 
-		float_t sumOfSquaredWeights();
-		void normalize(float_t queryNorm);
+		clucene_float_t sumOfSquaredWeights();
+		void normalize(clucene_float_t queryNorm);
 		Scorer* scorer(CL_NS(index)::IndexReader* reader);
 		Explanation* explain(CL_NS(index)::IndexReader* reader, int32_t doc);
 	};
@@ -128,13 +128,13 @@ CL_NS_DEF(search)
 	   return tmp;
    }
 
-	float_t TermWeight::sumOfSquaredWeights() {
+	clucene_float_t TermWeight::sumOfSquaredWeights() {
 		// legacy // idf = parentQuery->getSimilarity(searcher)->idf(_term, searcher); // compute idf
 		queryWeight = idf * parentQuery->getBoost();             // compute query weight
 		return queryWeight * queryWeight;           // square it
 	}
 
-	void TermWeight::normalize(float_t _queryNorm) {
+	void TermWeight::normalize(clucene_float_t _queryNorm) {
 		this->queryNorm = _queryNorm;
 		queryWeight *= queryNorm;                   // normalize query weight
 		value = queryWeight * idf;                  // idf for document
@@ -208,7 +208,7 @@ CL_NS_DEF(search)
 
 		Explanation* fieldNormExpl = _CLNEW Explanation();
 		uint8_t* fieldNorms = reader->norms(field);
-		float_t fieldNorm =
+		clucene_float_t fieldNorm =
 			fieldNorms!=NULL ? Similarity::decodeNorm(fieldNorms[doc]) : 0.0f;
 		fieldNormExpl->setValue(fieldNorm);
 

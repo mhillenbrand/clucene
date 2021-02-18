@@ -16,14 +16,14 @@ CL_NS_DEF(search)
 /** Expert: Describes the score computation for document and query. */
 class CLUCENE_EXPORT Explanation {
 private:
-	float_t value;															// the value of this node
+	clucene_float_t value;															// the value of this node
 	TCHAR description[LUCENE_SEARCH_EXPLANATION_DESC_LEN];					// what it represents
 	CL_NS(util)::CLArrayList<Explanation*,
 		CL_NS(util)::Deletor::Object<Explanation> >* details;					// sub-explanations
 
 public:
 	Explanation();
-	Explanation(float_t _value, const TCHAR* _description);
+	Explanation(clucene_float_t _value, const TCHAR* _description);
 	virtual ~Explanation();
 
 	/**
@@ -37,9 +37,9 @@ public:
 	virtual bool isMatch() const;
 
 	/** The value assigned to this explanation node. */
-	float_t getValue() const;
+	clucene_float_t getValue() const;
 	/** Sets the value assigned to this explanation node. */
-	void setValue(const float_t value);
+	void setValue(const clucene_float_t value);
 
 	/** A description of this explanation node. */
 	const TCHAR* getDescription() const; ///<returns reference
@@ -86,7 +86,7 @@ private:
 public:
 	ComplexExplanation();
 	ComplexExplanation(const ComplexExplanation& copy);
-	ComplexExplanation(const bool _match, const float_t _value, const TCHAR* _description);
+	ComplexExplanation(const bool _match, const clucene_float_t _value, const TCHAR* _description);
 	virtual ~ComplexExplanation();
 
 	/**

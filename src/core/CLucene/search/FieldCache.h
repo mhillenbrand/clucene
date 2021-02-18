@@ -108,7 +108,7 @@ public:
    * type <code>AUTO</code> and the actual found type.
    * @param reader  Used to get field values.
    * @param field   Which field contains the values.
-   * @return int32_t[], float_t[] or FieldCache::StringIndex.
+   * @return int32_t[], clucene_float_t[] or FieldCache::StringIndex.
    * @throws IOException  If any error occurs.
    */
    virtual FieldCacheAuto* getAuto (CL_NS(index)::IndexReader* reader, const TCHAR* field) = 0;
@@ -159,7 +159,7 @@ public:
 	int32_t contentLen; //number of items in the list
 	uint8_t contentType;
 	int32_t* intArray; //item 1
-	float_t* floatArray; //item 2
+	clucene_float_t* floatArray; //item 2
 	FieldCache::StringIndex* stringIndex; //item 3
 	TCHAR** stringArray; //item 4
 	CL_NS(util)::Comparable** comparableArray; //item 5

@@ -107,10 +107,10 @@ public:
 
 	
 	class CLUCENE_INLINE_EXPORT Float:public Comparable{
-		float_t value;
+		clucene_float_t value;
 	public:
-		float_t getValue() const;
-		Float(float_t val);
+		clucene_float_t getValue() const;
+		Float(clucene_float_t val);
 		int32_t compareTo(NamedObject* o);
 		static const char* getClassName();
 		const char* getObjectName() const;
@@ -254,7 +254,7 @@ public:
 	class CLUCENE_INLINE_EXPORT DummyFloat: public AbstractDeletor{
 	public:
 		void Delete(void*){}
-		static void doDelete(const float_t){
+		static void doDelete(const clucene_float_t){
 		}
 	};
 	template <typename _type>

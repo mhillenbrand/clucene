@@ -63,7 +63,7 @@ bool DisjunctionSumScorer::next()
 	return ( scorerDocQueue->size() >= minimumNrMatchers ) && advanceAfterCurrent();
 }
 
-float_t DisjunctionSumScorer::score()
+clucene_float_t DisjunctionSumScorer::score()
 {
 	return currentScore;
 }
@@ -106,7 +106,7 @@ TCHAR* DisjunctionSumScorer::toString()
 
 Explanation* DisjunctionSumScorer::explain( int32_t doc ){
 	Explanation* res = _CLNEW Explanation();
-	float_t sumScore = 0.0f;
+	clucene_float_t sumScore = 0.0f;
 	int32_t nrMatches = 0;
 	ScorersType::iterator ssi = subScorers.begin();
 	while (ssi != subScorers.end()) {

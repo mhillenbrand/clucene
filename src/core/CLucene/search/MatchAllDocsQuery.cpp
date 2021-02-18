@@ -19,8 +19,8 @@ CL_NS_DEF(search)
 class MatchAllDocsQuery::MatchAllDocsWeight : public Weight {
 private:
     Similarity* similarity;
-    float_t queryWeight;
-    float_t queryNorm;
+    clucene_float_t queryWeight;
+    clucene_float_t queryNorm;
     MatchAllDocsQuery* parentQuery;
 
 public:
@@ -31,11 +31,11 @@ public:
 
     Query* getQuery();
 
-    float_t getValue();
+    clucene_float_t getValue();
 
-    float_t sumOfSquaredWeights();
+    clucene_float_t sumOfSquaredWeights();
 
-    void normalize(float_t _queryNorm);
+    void normalize(clucene_float_t _queryNorm);
 
     Scorer* scorer(CL_NS(index)::IndexReader* reader);
 
@@ -46,7 +46,7 @@ class MatchAllDocsQuery::MatchAllScorer : public Scorer {
     CL_NS(index)::IndexReader* reader;
     int32_t id;
     int32_t maxId;
-    float_t _score;
+    clucene_float_t _score;
 
 public:
     MatchAllScorer(CL_NS(index)::IndexReader* _reader, Similarity* similarity, Weight* w);
@@ -58,7 +58,7 @@ public:
 
     bool next();
 
-    float_t score();
+    clucene_float_t score();
 
     bool skipTo(int32_t target);
 
@@ -91,7 +91,7 @@ bool MatchAllDocsQuery::MatchAllScorer::next() {
 	return false;
 }
 
-float_t MatchAllDocsQuery::MatchAllScorer::score() {
+clucene_float_t MatchAllDocsQuery::MatchAllScorer::score() {
 	return _score;
 }
 
@@ -125,16 +125,16 @@ Query* MatchAllDocsQuery::MatchAllDocsWeight::getQuery() {
 	return parentQuery;
 }
 
-float_t MatchAllDocsQuery::MatchAllDocsWeight::getValue() {
+clucene_float_t MatchAllDocsQuery::MatchAllDocsWeight::getValue() {
 	return queryWeight;
 }
 
-float_t MatchAllDocsQuery::MatchAllDocsWeight::sumOfSquaredWeights() {
+clucene_float_t MatchAllDocsQuery::MatchAllDocsWeight::sumOfSquaredWeights() {
 	queryWeight = parentQuery->getBoost();
 	return queryWeight * queryWeight;
 }
 
-void MatchAllDocsQuery::MatchAllDocsWeight::normalize(float_t _queryNorm) {
+void MatchAllDocsQuery::MatchAllDocsWeight::normalize(clucene_float_t _queryNorm) {
 	this->queryNorm = _queryNorm;
 	queryWeight *= this->queryNorm;
 }

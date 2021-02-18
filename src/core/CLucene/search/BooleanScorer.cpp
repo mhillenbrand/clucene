@@ -75,7 +75,7 @@ CL_NS_DEF(search)
 	return false;
   }
 
-	float_t BooleanScorer::score(){
+	clucene_float_t BooleanScorer::score(){
 		if (coordFactors == NULL)
 			computeCoordFactors();
 		return current->score * coordFactors[current->coord];
@@ -130,7 +130,7 @@ CL_NS_DEF(search)
   }
 
   void BooleanScorer::computeCoordFactors(){
-    coordFactors = _CL_NEWARRAY(float_t,maxCoord);
+    coordFactors = _CL_NEWARRAY(clucene_float_t,maxCoord);
     for (int32_t i = 0; i < maxCoord; i++)
       coordFactors[i] = getSimilarity()->coord(i, maxCoord-1);
   }
@@ -277,7 +277,7 @@ CL_NS_DEF(search)
   {
   }
 
-  void BooleanScorer::Collector::collect(const int32_t doc, const float_t score){
+  void BooleanScorer::Collector::collect(const int32_t doc, const clucene_float_t score){
     BucketTable* table = bucketTable;
     int32_t i = doc & (BooleanScorer::BucketTable_SIZE-1);
     Bucket* bucket = &table->buckets[i];

@@ -26,7 +26,7 @@ class BooleanScorer2::Coordinator {
 public:
 	int32_t maxCoord;
 	int32_t nrMatchers; // to be increased by score() of match counting scorers.
-	float_t* coordFactors;
+	clucene_float_t* coordFactors;
 	Scorer* parentScorer;
 
 	Coordinator( Scorer* parent ):
@@ -44,7 +44,7 @@ public:
 
 	void init()
 	{
-		coordFactors = _CL_NEWARRAY( float_t, maxCoord+1 );
+		coordFactors = _CL_NEWARRAY( clucene_float_t, maxCoord+1 );
 		Similarity* sim = parentScorer->getSimilarity();
 		for ( int32_t i = 0; i <= maxCoord; i++ ) {
 			coordFactors[i] = sim->coord(i, maxCoord);
@@ -56,7 +56,7 @@ public:
 		nrMatchers = 0;
 	}
 
-	float_t coordFactor() {
+	clucene_float_t coordFactor() {
 		return coordFactors[nrMatchers];
 	}
 };
@@ -77,7 +77,7 @@ public:
 		_CLDELETE( scorer );
 	}
 
-	float_t score()
+	clucene_float_t score()
 	{
 		if ( doc() >= lastScoredDoc ) {
 			lastScoredDoc = this->doc();
@@ -123,7 +123,7 @@ public:
 		return 0;
 	}
 	bool next() { return false; }
-	float_t score() {
+	clucene_float_t score() {
 		_CLTHROWA(CL_ERR_UnsupportedOperation, "UnsupportedOperationException: BooleanScorer2::NonMatchingScorer::score");
 		return 0.0;
 	}
@@ -173,10 +173,10 @@ public:
 	* @return The score of the required scorer, eventually increased by the score
 	* of the optional scorer when it also matches the current document.
 	*/
-	float_t score()
+	clucene_float_t score()
 	{
 		int32_t curDoc = reqScorer->doc();
-		float_t reqScore = reqScorer->score();
+		clucene_float_t reqScore = reqScorer->score();
 
 		if ( firstTimeOptScorer ) {
 			firstTimeOptScorer = false;
@@ -261,7 +261,7 @@ public:
 	* Initially invalid, until {@link #next()} is called the first time.
 	* @return The score of the required scorer.
 	*/
-	float_t score() {
+	clucene_float_t score() {
 		return reqScorer->score();
 	}
 
@@ -386,7 +386,7 @@ public:
 
 	virtual ~BSConjunctionScorer(){
 	}
-	float_t score()
+	clucene_float_t score()
 	{
 		if ( this->doc() >= lastScoredDoc ) {
 			lastScoredDoc = this->doc();
@@ -413,7 +413,7 @@ public:
 	{
 	}
 
-	float_t score() {
+	clucene_float_t score() {
 		if ( this->doc() >= lastScoredDoc ) {
 			lastScoredDoc = this->doc();
 			coordinator->nrMatchers += _nrMatchers;
@@ -646,10 +646,10 @@ bool BooleanScorer2::next()
 	return _internal->countingSumScorer->next();
 }
 
-float_t BooleanScorer2::score()
+clucene_float_t BooleanScorer2::score()
 {
 	_internal->coordinator->initDoc();
-	float_t sum = _internal->countingSumScorer->score();
+	clucene_float_t sum = _internal->countingSumScorer->score();
 	return sum * _internal->coordinator->coordFactor();
 }
 

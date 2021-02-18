@@ -118,8 +118,8 @@ CL_NS_DEF(search)
     return more;
   }
 
-  float_t ConjunctionScorer::score(){
-    float_t sum = 0.0f;
+  clucene_float_t ConjunctionScorer::score(){
+    clucene_float_t sum = 0.0f;
     for (size_t i = 0; i < scorers->length; i++) {
       sum += scorers->values[i]->score();
     }

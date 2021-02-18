@@ -84,7 +84,7 @@ public:
 	* Initially invalid, until {@link #next()} or {@link #skipTo(int)}
 	* is called the first time.
 	*/
-	virtual float_t score() = 0;
+	virtual clucene_float_t score() = 0;
 
 	/**
 	* Skips to the document matching this Scorer with the lowest doc Id

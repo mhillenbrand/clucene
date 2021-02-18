@@ -121,7 +121,7 @@ public:
   
   class CheckAbort {
   private:
-    float_t workCount;
+    clucene_float_t workCount;
     MergePolicy::OneMerge* merge;
     CL_NS(store)::Directory* dir;
   public:
@@ -135,7 +135,7 @@ public:
      * that the time in between calls to merge.checkAborted
      * is up to ~ 1 second.
      */
-    void work(float_t units);
+    void work(clucene_float_t units);
   };
 	
 private:

@@ -23,7 +23,7 @@ public:
 	QFHitCollector(CL_NS(util)::BitSet* bits){
 		this->bits = bits;
 	}
-	void collect(const int32_t doc, const float_t /*score*/){
+	void collect(const int32_t doc, const clucene_float_t /*score*/){
 		bits->set(doc);  // set bit for hit
 	}
 };

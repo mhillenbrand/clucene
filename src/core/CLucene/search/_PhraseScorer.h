@@ -28,12 +28,12 @@ private:
 	Weight* weight;
 protected:
 	uint8_t* norms;
-	float_t value;
+	clucene_float_t value;
 private:
 	bool firstTime;
 	bool more;
 protected:
-	float_t freq; //phrase frequency in current doc as computed by phraseFreq().
+	clucene_float_t freq; //phrase frequency in current doc as computed by phraseFreq().
 
 	PhraseQueue* pq;        //is used to order the list point to by first and last
 	PhrasePositions* first; //Points to the first in the list of PhrasePositions
@@ -47,7 +47,7 @@ public:
 
 	int32_t doc() const;
 	bool next();
-	float_t score();
+	clucene_float_t score();
 	bool skipTo(int32_t target);
 
 
@@ -61,7 +61,7 @@ protected:
 	* <br>Note, that containing all phrase terms does not guarantee a match - they have to be found in matching locations.  
 	* @return frequency of the phrase in current doc, 0 if not found. 
 	*/
-	virtual float_t phraseFreq() =0;
+	virtual clucene_float_t phraseFreq() =0;
 
 	//Transfers the PhrasePositions from the PhraseQueue pq to
 	//the PhrasePositions list with first as its first element

@@ -44,7 +44,7 @@ public:
 	 * @return a score which is passed to the TermHighlighter class to influence the mark-up of the text
 	 * (this return value is NOT used to score the fragment)
 	 */
-	virtual float_t getTokenScore(Token * token) = 0;
+	virtual clucene_float_t getTokenScore(Token * token) = 0;
 	
 
 	/**
@@ -52,7 +52,7 @@ public:
 	 * call setScore() on the fragment passed in startFragment to record total info
 	 *
 	 */	
-	virtual float_t getFragmentScore() = 0;
+	virtual clucene_float_t getFragmentScore() = 0;
 
 };
 

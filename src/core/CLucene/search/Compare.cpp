@@ -94,7 +94,7 @@ int32_t ScoreDocComparators::Int32::sortType() {
 	return SortField::INT;
 }
 
-ScoreDocComparators::Float::Float(float_t* fieldOrder, int32_t len)
+ScoreDocComparators::Float::Float(clucene_float_t* fieldOrder, int32_t len)
 {
 	this->fieldOrder = fieldOrder;
 	this->length = len;

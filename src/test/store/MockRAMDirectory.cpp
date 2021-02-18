@@ -139,12 +139,12 @@ int64_t MockRAMDirectory::getMaxSizeInBytes() const {
 	return maxSize;
 }
 
-void MockRAMDirectory::setRandomIOExceptionRate(float_t rate, int32_t seed) {
+void MockRAMDirectory::setRandomIOExceptionRate(clucene_float_t rate, int32_t seed) {
 	srand(seed);
 	randomIOExceptionRate = rate;
 }
 
-float_t MockRAMDirectory::getRandomIOExceptionRate(void) const {
+clucene_float_t MockRAMDirectory::getRandomIOExceptionRate(void) const {
 	return randomIOExceptionRate;
 }
 

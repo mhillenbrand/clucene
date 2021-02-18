@@ -448,7 +448,7 @@ CL_NS_DEF2(queryParser,legacy)
 
 
 		if( q!=NULL && boost != NULL ){
-			float_t f = 1.0F;
+			clucene_float_t f = 1.0F;
 			try {
 				f = _tcstod(boost->Value, NULL);
 			}catch(...){

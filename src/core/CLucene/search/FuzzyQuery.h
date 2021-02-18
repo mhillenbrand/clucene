@@ -19,12 +19,12 @@ CL_NS_DEF(search)
 */
 class CLUCENE_EXPORT FuzzyQuery : public MultiTermQuery {
 private:
-	float_t minimumSimilarity;
+	clucene_float_t minimumSimilarity;
 	size_t prefixLength;
 protected:
 	FuzzyQuery(const FuzzyQuery& clone);
 public:
-	static float_t defaultMinSimilarity;
+	static clucene_float_t defaultMinSimilarity;
 	static int32_t defaultPrefixLength;
 
 	/**
@@ -43,14 +43,14 @@ public:
 	* @throws IllegalArgumentException if minimumSimilarity is &gt; 1 or &lt; 0
 	* or if prefixLength &lt; 0 or &gt; <code>term.text().length()</code>.
 	*/
-	FuzzyQuery(CL_NS(index)::Term* term, float_t minimumSimilarity=-1, size_t prefixLength=0);
+	FuzzyQuery(CL_NS(index)::Term* term, clucene_float_t minimumSimilarity=-1, size_t prefixLength=0);
 	virtual ~FuzzyQuery();
 
 	/**
 	* Returns the minimum similarity that is required for this query to match.
 	* @return float value between 0.0 and 1.0
 	*/
-	float_t getMinSimilarity() const;
+	clucene_float_t getMinSimilarity() const;
 
 	/**
 	* Returns the prefix length, i.e. the number of characters at the start
@@ -89,8 +89,8 @@ private:
 	int32_t* d;
 	size_t dLen;
 
-	//float_t distance;
-	float_t _similarity;
+	//clucene_float_t distance;
+	clucene_float_t _similarity;
 	bool _endEnum;
 
 	CL_NS(index)::Term* searchTerm; 
@@ -100,7 +100,7 @@ private:
 	TCHAR* prefix;
 	size_t prefixLength;
 
-	float_t minimumSimilarity;
+	clucene_float_t minimumSimilarity;
 	double scale_factor;
 	int32_t maxDistances[LUCENE_TYPICAL_LONGEST_WORD_IN_INDEX];
 
@@ -145,7 +145,7 @@ private:
 	* @return the similarity,  0.0 or less indicates that it matches less than the required
 	* threshold and 1.0 indicates that the text and target are identical
 	*/
-	float_t similarity(const TCHAR* target, const size_t targetLen);
+	clucene_float_t similarity(const TCHAR* target, const size_t targetLen);
 
 	/**
 	* The max Distance is the maximum Levenshtein distance for the text
@@ -185,7 +185,7 @@ public:
 	* @param prefixLength Length of required common prefix. Default value is 0.
 	* @throws IOException
 	*/
-	FuzzyTermEnum(CL_NS(index)::IndexReader* reader, CL_NS(index)::Term* term, float_t minSimilarity=FuzzyQuery::defaultMinSimilarity, size_t prefixLength=0);
+	FuzzyTermEnum(CL_NS(index)::IndexReader* reader, CL_NS(index)::Term* term, clucene_float_t minSimilarity=FuzzyQuery::defaultMinSimilarity, size_t prefixLength=0);
 	virtual ~FuzzyTermEnum();
 
 	/** Close the enumeration */
@@ -194,7 +194,7 @@ public:
 	/** Returns the difference between the distance and the fuzzy threshold
 	*  multiplied by the scale factor
 	*/
-	float_t difference();
+	clucene_float_t difference();
 
 	const char* getObjectName() const;
 	static const char* getClassName();

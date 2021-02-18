@@ -36,7 +36,7 @@ CL_NS_DEF(search)
 		void score( HitCollector* hc );
 		int32_t doc() const;
 		bool next();
-		float_t score();
+		clucene_float_t score();
 		bool skipTo( int32_t target );
 		Explanation* explain( int32_t doc );
 		virtual TCHAR* toString();

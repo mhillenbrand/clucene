@@ -47,9 +47,9 @@ CL_NS_DEF(search)
 			BooleanQuery* parentQuery);
 		virtual ~BooleanWeight();
 		Query* getQuery();
-		float_t getValue();
-		float_t sumOfSquaredWeights();
-		void normalize(float_t norm);
+		clucene_float_t getValue();
+		clucene_float_t sumOfSquaredWeights();
+		void normalize(clucene_float_t norm);
 		Scorer* scorer(CL_NS(index)::IndexReader* reader);
 		Explanation* explain(CL_NS(index)::IndexReader* reader, int32_t doc);
 	};// BooleanWeight
@@ -301,7 +301,7 @@ CL_NS_DEF(search)
   }
 
 
-	float_t BooleanWeight::getValue() { return parentQuery->getBoost(); }
+	clucene_float_t BooleanWeight::getValue() { return parentQuery->getBoost(); }
 	Query* BooleanWeight::getQuery() { return (Query*)parentQuery; }
 
 	BooleanWeight::BooleanWeight(Searcher* searcher,
@@ -319,12 +319,12 @@ CL_NS_DEF(search)
 		this->weights.clear();
 	}
 
-    float_t BooleanWeight::sumOfSquaredWeights() {
-      float_t sum = 0.0f;
+    clucene_float_t BooleanWeight::sumOfSquaredWeights() {
+      clucene_float_t sum = 0.0f;
       for (uint32_t i = 0 ; i < weights.size(); i++) {
         BooleanClause* c = (*clauses)[i];
         Weight* w = weights[i];
-        float_t s = w->sumOfSquaredWeights();         // sum sub weights
+        clucene_float_t s = w->sumOfSquaredWeights();         // sum sub weights
         if (!c->isProhibited())
           // only add to sum for non-prohibited clauses
           sum += s;
@@ -333,7 +333,7 @@ CL_NS_DEF(search)
       return sum ;
     }
 
-    void BooleanWeight::normalize(float_t norm) {
+    void BooleanWeight::normalize(clucene_float_t norm) {
       norm *= parentQuery->getBoost();                         // incorporate boost
       for (uint32_t i = 0 ; i < weights.size(); i++) {
         Weight* w = weights[i];
@@ -369,7 +369,7 @@ CL_NS_DEF(search)
 		sumExpl->setDescription(_T("sum of:"));
 		int32_t coord = 0;
 		int32_t maxCoord = 0;
-		float_t sum = 0.0f;
+		clucene_float_t sum = 0.0f;
 		bool fail = false;
 		int32_t shouldMatchCount = 0;
 		for (size_t i = 0 ; i < weights.size(); i++) {
@@ -432,7 +432,7 @@ CL_NS_DEF(search)
 		sumExpl->setMatch(0 < coord ? true : false);
 		sumExpl->setValue(sum);
 
-		float_t coordFactor = similarity->coord(coord, maxCoord);
+		clucene_float_t coordFactor = similarity->coord(coord, maxCoord);
 		if (coordFactor == 1.0f)                      // coord is no-op
 			return sumExpl;                             // eliminate wrapper
 		else {

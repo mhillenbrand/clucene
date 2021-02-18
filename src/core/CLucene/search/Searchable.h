@@ -42,7 +42,7 @@ CL_NS_DEF(search)
 
       /** Lower-level search API.
       *
-      * <p>{@link HitCollector#collect(int32_t,float_t)} is called for every non-zero
+      * <p>{@link HitCollector#collect(int32_t,clucene_float_t)} is called for every non-zero
       * scoring document.
       *
       * <p>Applications should only use this if they need <i>all</i> of the
@@ -147,7 +147,7 @@ CL_NS_DEF(search)
 
 		/** Lower-level search API.
 		*
-		* <p>{@link HitCollector#collect(int32_t	,float_t)} is called for every non-zero
+		* <p>{@link HitCollector#collect(int32_t	,clucene_float_t)} is called for every non-zero
 		* scoring document.
 		*
 		* <p>Applications should only use this if they need <i>all</i> of the

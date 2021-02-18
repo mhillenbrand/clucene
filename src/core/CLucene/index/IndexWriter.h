@@ -370,7 +370,7 @@ public:
    * Default value is 16 MB (which means flush when buffered
    * docs consume 16 MB RAM).  Change using {@link #setRAMBufferSizeMB}.
    */
-  static const float_t DEFAULT_RAM_BUFFER_SIZE_MB;
+  static const clucene_float_t DEFAULT_RAM_BUFFER_SIZE_MB;
 
   /**
    * Disabled by default (because IndexWriter flushes by RAM usage
@@ -626,7 +626,7 @@ public:
   /**
    * Returns the value set by {@link #setRAMBufferSizeMB} if enabled.
    */
-  float_t getRAMBufferSizeMB();
+  clucene_float_t getRAMBufferSizeMB();
 
   /** If non-null, this will be the default infoStream used
    * by a newly instantiated IndexWriter.
@@ -683,7 +683,7 @@ public:
    * enabled but non-positive, or it disables ramBufferSize
    * when maxBufferedDocs is already disabled
    */
-  void setRAMBufferSizeMB(float_t mb);
+  void setRAMBufferSizeMB(clucene_float_t mb);
 
 
   /** Expert: the {@link MergeScheduler} calls this method

@@ -35,10 +35,10 @@ CL_NS_DEF(search)
 class MultiPhraseWeight : public Weight {
 private:
 	Similarity* similarity;
-    float_t value;
-    float_t idf;
-    float_t queryNorm;
-    float_t queryWeight;
+    clucene_float_t value;
+    clucene_float_t idf;
+    clucene_float_t queryNorm;
+    clucene_float_t queryWeight;
 
 	MultiPhraseQuery* parentQuery;
 
@@ -57,14 +57,14 @@ public:
 	virtual ~MultiPhraseWeight(){};
 
     Query* getQuery() { return parentQuery; }
-    float_t getValue() { return value; }
+    clucene_float_t getValue() { return value; }
 
-    float_t sumOfSquaredWeights() {
+    clucene_float_t sumOfSquaredWeights() {
       queryWeight = idf * parentQuery->getBoost();             // compute query weight
       return queryWeight * queryWeight;           // square it
     }
 
-    void normalize(float_t _queryNorm) {
+    void normalize(clucene_float_t _queryNorm) {
       this->queryNorm = _queryNorm;
       queryWeight *= _queryNorm;                   // normalize query weight
       value = queryWeight * idf;                  // idf for document
@@ -176,7 +176,7 @@ public:
 
 		Explanation* fieldNormExpl = _CLNEW Explanation();
 		uint8_t* fieldNorms = reader->norms(parentQuery->field);
-		float_t fieldNorm =
+		clucene_float_t fieldNorm =
 			fieldNorms!=NULL ? Similarity::decodeNorm(fieldNorms[doc]) : 0.0f;
 		fieldNormExpl->setValue(fieldNorm);
 

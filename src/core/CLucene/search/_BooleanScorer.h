@@ -18,7 +18,7 @@ CL_NS_DEF(search)
 		class Bucket {
 		public:
 			int32_t	doc;				  // tells if bucket is valid
-			float_t	score;				  // incremental score
+			clucene_float_t	score;				  // incremental score
 			int32_t	bits;					  // used for bool constraints
 			int32_t	coord;					  // count of terms in score
 			Bucket*	next;				  // next valid bucket
@@ -61,7 +61,7 @@ CL_NS_DEF(search)
 		public:
 			Collector(const int32_t mask, BucketTable* bucketTable);
 			
-			void collect(const int32_t doc, const float_t score);
+			void collect(const int32_t doc, const clucene_float_t score);
 		};
 
 		SubScorer* scorers;
@@ -80,14 +80,14 @@ CL_NS_DEF(search)
 		LUCENE_STATIC_CONSTANT(int32_t,BucketTable_SIZE=1024);
 		int32_t requiredMask;
 		int32_t prohibitedMask;
-		float_t* coordFactors;
+		clucene_float_t* coordFactors;
 
     	BooleanScorer( Similarity* similarity, int32_t minNrShouldMatch = 1, const bool isTakingOwnership = true );
 		virtual ~BooleanScorer();
 		void add(Scorer* scorer, const bool required, const bool prohibited);
 		int32_t doc() const { return current->doc; }
 		bool next();
-		float_t score();
+		clucene_float_t score();
 		void score( HitCollector* hc );
 		bool skipTo(int32_t target);
 		Explanation* explain(int32_t doc);

@@ -34,7 +34,7 @@ TokenGroup::~TokenGroup(void)
 	delete[] tokens;
 }
 
-void TokenGroup::addToken(Token* token, float_t score)
+void TokenGroup::addToken(Token* token, clucene_float_t score)
 {
 	if(numTokens < MAX_NUM_TOKENS_PER_GROUP)
     {	    
@@ -59,7 +59,7 @@ CL_NS(analysis)::Token& TokenGroup::getToken(int32_t index)
 	return tokens[index];
 }
 
-float_t TokenGroup::getScore(int32_t index) const
+clucene_float_t TokenGroup::getScore(int32_t index) const
 {
 	return scores[index];
 }
@@ -79,9 +79,9 @@ int32_t TokenGroup::getStartOffset() const
 	return startOffset;
 }
 
-float_t TokenGroup::getTotalScore() const
+clucene_float_t TokenGroup::getTotalScore() const
 {
-	float_t total=0;
+	clucene_float_t total=0;
 	for (int32_t i = 0; i < numTokens; i++)
 	{
 		total+=scores[i];
@@ -89,7 +89,7 @@ float_t TokenGroup::getTotalScore() const
 	return total;
 }
 
-/*void addToken(CL_NS(analysis)::Token* token, float_t score)
+/*void addToken(CL_NS(analysis)::Token* token, clucene_float_t score)
 {
 	if(numTokens < MAX_NUM_TOKENS_PER_GROUP)
   		{

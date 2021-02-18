@@ -46,8 +46,8 @@ private:
 	CL_NS(util)::CLHashSet<TCHAR*,
 		CL_NS(util)::Compare::TChar,
 		CL_NS(util)::Deletor::tcArray> _uniqueTermsInFragment;
-	float_t _totalScore;
-	float_t _maxTermWeight;
+	clucene_float_t _totalScore;
+	clucene_float_t _maxTermWeight;
 	CL_NS(util)::CLHashMap<const TCHAR*, const WeightedTerm *,
 		CL_NS(util)::Compare::TChar,
 		CL_NS(util)::Equals::TChar,
@@ -84,12 +84,12 @@ public:
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.highlight.FragmentScorer#scoreToken(org.apache.lucene.analysis.Token)
 	 */
-	float_t getTokenScore(CL_NS(analysis)::Token * token);
+	clucene_float_t getTokenScore(CL_NS(analysis)::Token * token);
 	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.highlight.FragmentScorer#endFragment(org.apache.lucene.search.highlight.TextFragment)
 	 */
-	float_t getFragmentScore();
+	clucene_float_t getFragmentScore();
 
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.highlight.FragmentScorer#allFragmentsProcessed()
@@ -101,7 +101,7 @@ public:
 	 * @return The highest weighted term (useful for passing to GradientFormatter to set
 	 * top end of coloring scale.  
 		*/
-	float_t getMaxTermWeight();
+	clucene_float_t getMaxTermWeight();
 
 private:
 	void initialize(WeightedTerm** weightedTerms);

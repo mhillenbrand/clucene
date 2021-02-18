@@ -31,14 +31,14 @@ CL_NS_DEF(search)
 	  _CLDELETE_LARRAY(repeats);
   }
 
-  float_t SloppyPhraseScorer::phraseFreq() {
+  clucene_float_t SloppyPhraseScorer::phraseFreq() {
 
 	  CND_PRECONDITION(first != NULL,"first is NULL");
 	  CND_PRECONDITION(last  != NULL,"last is NULL");
 	  CND_PRECONDITION(pq    != NULL,"pq is NULL");
 
       int32_t end = initPhrasePositions();
-	  float_t freq = 0.0f;
+	  clucene_float_t freq = 0.0f;
 	  bool done = (end<0);
 
 	  while (!done) {

@@ -80,10 +80,10 @@ CL_NS_DEF(search)
 		void getPositions(CL_NS(util)::ValueArray<int32_t>& result) const;
 
 		//Returns the sum of squared weights
-    float_t sumOfSquaredWeights(Searcher* searcher);
+    clucene_float_t sumOfSquaredWeights(Searcher* searcher);
 
 		//Normalizes the Weight
-    void normalize(const float_t norm);
+    void normalize(const clucene_float_t norm);
 
     Scorer* scorer(CL_NS(index)::IndexReader* reader);
 

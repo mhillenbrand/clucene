@@ -22,7 +22,7 @@ CL_NS_DEF(search)
 
     protected:
       //Returns the exact freqency of the phrase
-      float_t phraseFreq();
+      clucene_float_t phraseFreq();
     };
 CL_NS_END
 #endif

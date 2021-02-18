@@ -88,7 +88,7 @@ CL_NS_USE(index)
 				_CLDECDELETE(term);
 
   				//IDF algorithm taken from DefaultSimilarity class
-  				float_t idf=(float_t)(log(totalNumDocs/(float_t)(docFreq+1)) + 1.0);
+  				clucene_float_t idf=(clucene_float_t)(log(totalNumDocs/(clucene_float_t)(docFreq+1)) + 1.0);
   				(*itr)->setWeight((*itr)->getWeight() * idf);
   			}catch (CLuceneError& e){
   				if ( e.number()!=CL_ERR_IO )

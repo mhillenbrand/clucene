@@ -60,7 +60,7 @@ Query* MultiFieldQueryParser::getFieldQuery(const TCHAR* field, TCHAR* queryText
 	}
 }
 
-Query* MultiFieldQueryParser::getFuzzyQuery(const TCHAR* field, TCHAR* termStr, const float_t minSimilarity){
+Query* MultiFieldQueryParser::getFuzzyQuery(const TCHAR* field, TCHAR* termStr, const clucene_float_t minSimilarity){
 	if (field == NULL) {
 		vector<BooleanClause*> clauses;
 		for (int i = 0; fields[i]!=NULL; ++i) {
